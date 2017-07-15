@@ -12,6 +12,7 @@ import { ChartModule } from 'angular2-chartjs';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './home';
+import { SharedModule } from './shared/shared.module';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -39,7 +40,8 @@ const APP_PROVIDERS = [
     FormsModule,
     HttpModule,
     ChartModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    SharedModule.forRoot()
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

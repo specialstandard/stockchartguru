@@ -17,29 +17,7 @@ import {
   styleUrls: [
     './app.component.css'
   ],
-  template: `
-    <nav>
-      <a [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Index
-      </a>
-      <a [routerLink]=" ['./home'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Home
-      </a>
-    </nav>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-
-    <footer>
-      <div>
-
-      </div>
-    </footer>
-  `
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
