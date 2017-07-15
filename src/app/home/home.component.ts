@@ -2,6 +2,7 @@ declare var CanvasJS: any;
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
 import 'rxjs/Rx';
+import { SP500 } from './sp500'
 
 @Component({
     selector: 'home',
@@ -9,17 +10,18 @@ import 'rxjs/Rx';
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-    stockArr: any;
-    constructor(private http: Http 
-    ) { }
+    constructor(private http: Http) { }
 
     chart: any = null;
     dataPoints: any[] = [];
     equity: any;
     index: any;
+    sp500 = SP500
+    stockArr: any;
     symbol: string;
 
     public ngOnInit() {
+        console.log('sp500: ', this.sp500)
         this.initChart()
     }
 
@@ -28,15 +30,12 @@ export class HomeComponent implements OnInit {
             this.chart = null;
         }
         this.dataPoints = [];
-        //this.symbol = this.getRandomSymbol()
-        this.symbol = 'MMM'
+        this.symbol = this.getRandomSymbol()
         console.log('symbol', this.symbol);        
         this.getEquity()
     }
 
     getEquity() {
-        //this.yahooStockService.get(this.equity)
-        //     .subscribe(result => this.processData(result))
         this.http.get('./assets/stocks/' + this.symbol + '.json')
             .map(r=>r.json())
             .subscribe((result) => {
@@ -109,5 +108,14 @@ export class HomeComponent implements OnInit {
         //   between (min, max) ... (inclusive,exclusive)
     getRandom(min: any, max: any) {
         return Math.floor(Math.random() * (max - min) + min);
+    }
+    
+    getRandomSymbol(): string {
+        let symbol = this.sp500[Math.floor(Math.random() * this.sp500.length)]
+        if ( symbol === 'AA' || symbol == 'FTV' || symbol == 'UA' || symbol == 'KO') {
+            this.getRandomSymbol();
+        } else {
+            return symbol;
+        }
     }
 }

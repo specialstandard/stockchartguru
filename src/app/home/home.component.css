@@ -1,1 +1,4 @@
-/*styles for home content only*/
+#chartContainer {
+    max-width: 800px; 
+    height:475px
+}
