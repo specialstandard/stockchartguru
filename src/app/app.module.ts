@@ -12,6 +12,7 @@ import { ChartModule } from 'angular2-chartjs';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './home';
+import { AboutComponent } from "./about/about.component";
 import { SharedModule } from './shared/shared.module';
 
 import '../styles/styles.scss';
@@ -31,6 +32,7 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     HomeComponent,
+    AboutComponent
   ],
   /**
    * Import Angular's modules.
