@@ -33,7 +33,7 @@
 
 <div class="row visible-xs portfolio--small">
     <div class="col-xs-6">
-        Value: ${{ accountValue }}
+        Value: $<span class="value">{{ accountValue }}</span>
     </div>
     <div class="col-xs-6">
         Profit: <span *ngIf="profit != null">{{ profit }}%</span>

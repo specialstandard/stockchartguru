@@ -20,9 +20,15 @@
     &--small {
         margin-left: 2px;
         margin-right: -2px;
-        padding: 10px 15px;
+        padding: 2px 0px;
         border: 1px solid grey;
         border-radius: 2px;
+        font-weight: bold;
+        font-size: 18px;
+
+        .value {
+            color: #5cb85c;
+        }
     }
 }
 
