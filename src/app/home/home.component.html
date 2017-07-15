@@ -6,28 +6,30 @@
     </div>
     <div class="col-sm-3 hidden-xs">
         <div class="portfolio">
-        <h1>Portfolio</h1>
-        <p>
-            Value: ${{ accountValue }}
-        </p>
-        <p>
-            Profit: <span *ngIf="profit != null">{{ profit }}%</span>
-        </p>
-        <p >
-            Entry Price: <span *ngIf="entryPrice != 0">{{ entryPrice }}</span><br>
-            Current Price: <span *ngIf="currentPrice !=0">{{ currentPrice }}</span><br>
-            Days this trade: <span >{{ daysInTrade }}</span><br>
-            Total days traded: <span >{{ totalDaysInTrade }}</span><br>
-            APY: <span >{{ APY | number:'1.2-2' }}%</span><br>
-            Number Of Trades: <span >{{ numOfTrades }}</span><br>
-            Ave Days Per Trade: <span >{{ averageDaysPerTrade | number:'1.2-2' }}</span>
-            Trades Won: <span >{{ numWon }}</span><br>
-            Trades Lost: <span >{{ numLost }}</span><br>
-            Ave PPW: <span >{{ averagePercentPerWin | number:'1.2-2' }}%</span><br>
-            Ave PPL: <span >{{ averagePercentPerLoss | number:'1.2-2' }}%</span><br>
-            Won <span >{{ 100*numWon/numOfTrades | number:'1.2-2' }}%</span><br>
-        </p>
-    </div>
+            <h1>Portfolio</h1>
+            <div class="stats">
+                <p>
+                    Value: $<span class="value">{{ accountValue }}</span>
+                </p>
+                <p>
+                    Profit: <span *ngIf="profit != null">{{ profit }}%</span>
+                </p>
+                <p >
+                    Entry Price: <span *ngIf="entryPrice != 0">{{ entryPrice }}</span><br>
+                    Current Price: <span *ngIf="currentPrice !=0">{{ currentPrice }}</span><br>
+                    Days this trade: <span >{{ daysInTrade }}</span><br>
+                    Total days traded: <span >{{ totalDaysInTrade }}</span><br>
+                    APY: <span >{{ APY | number:'1.2-2' }}%</span><br>
+                    Number Of Trades: <span >{{ numOfTrades }}</span><br>
+                    Ave Days Per Trade: <span >{{ averageDaysPerTrade | number:'1.2-2' }}</span>
+                    Trades Won: <span >{{ numWon }}</span><br>
+                    Trades Lost: <span >{{ numLost }}</span><br>
+                    Ave PPW: <span >{{ averagePercentPerWin | number:'1.2-2' }}%</span><br>
+                    Ave PPL: <span >{{ averagePercentPerLoss | number:'1.2-2' }}%</span><br>
+                    Won <span >{{ 100*numWon/numOfTrades | number:'1.2-2' }}%</span><br>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -47,7 +49,7 @@
                 <button class="btn btn-primary" (click)="initChart()" >Next Chart</button>
             </div>
             <div class="button-container col-xs-6">
-                <button class="btn btn-info" (click)="advanceChart()">Advance</button><br><br>
+                <button class="btn btn-info" (click)="advanceChart()">Advance</button>
             </div>
         </div>
         <div class="row">

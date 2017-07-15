@@ -7,16 +7,17 @@
 .chart {
     #chartContainer {
         max-width: 800px; 
-        height:475px
-    }
-    @media(max-width: 475px) {
-        //height: 100vw;
+        height:475px;
+
+        @media(max-width: 768px) {
+            height: 310px;
+        }        
     }
 }
 
 .portfolio {
     max-width: 240px;
-
+    
     &--small {
         margin-left: 2px;
         margin-right: -2px;
@@ -25,11 +26,15 @@
         border-radius: 2px;
         font-weight: bold;
         font-size: 18px;
-
-        .value {
-            color: #5cb85c;
-        }
     }
+    .stats {
+        font-weight: bold;
+        font-size: 16px;
+    }
+}
+.value {
+    color: #5cb85c;
+    font-size: 20px;
 }
 
 .buttons {
@@ -38,6 +43,12 @@
         width: 100%;
         min-width: 100px;
         height: 100px;
+        font-weight: bold;
+        font-size: 18px;
+        
+        @media(max-width: 768px) {
+            height: 50px;
+        }  
     }
 }
 
