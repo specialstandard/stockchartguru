@@ -44,24 +44,26 @@
     <div class="buttons col-xs-12">
         <div class="row">
             <div class="button-container col-xs-6">
-                <button (click)="initChart()" >Next Chart</button>
+                <button class="btn btn-primary" (click)="initChart()" >Next Chart</button>
             </div>
             <div class="button-container col-xs-6">
-                <button (click)="advanceChart()">Advance</button><br><br>
+                <button class="btn btn-info" (click)="advanceChart()">Advance</button><br><br>
             </div>
         </div>
         <div class="row">
             <div class="button-container col-xs-6">
-                <button *ngIf="!activePosition" (click)="buy()">Buy</button>
+                <button class="btn btn-success" *ngIf="!activePosition" (click)="buy()">Buy</button>
             </div>
             <div class="button-container col-xs-6">
-                <button *ngIf="!activePosition" (click)="short()">Short</button>
+                <button class="btn btn-danger" *ngIf="!activePosition" (click)="short()">Sell Short</button>
             </div>
-            <div class="button-container col-xs-6">
-                <button *ngIf="activeShort" (click)="buyToCover()">Buy to Cover</button>
+        </div>
+        <div class="row">
+            <div class="button-container col-xs-12">
+                <button class="btn btn-warning" *ngIf="activeShort" (click)="buyToCover()">Buy to Cover</button>
             </div>
-            <div class="button-container col-xs-6">
-                <button *ngIf="activeLong" (click)="sellToClose(profit)">Sell to Close</button>
+            <div class="button-container col-xs-12">
+                <button class="btn btn-warning" *ngIf="activeLong" (click)="sellToClose(profit)">Sell to Close</button>
             </div>
         </div>
     </div>
