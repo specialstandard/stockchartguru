@@ -1,57 +1,113 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-
-import { AppState } from '../app.service';
-import { Title } from './title';
-import { XLargeDirective } from './x-large';
+declare var CanvasJS: any;
+import { Component, OnInit } from '@angular/core';
+import { Http } from "@angular/http";
+import 'rxjs/Rx';
 
 @Component({
-  /**
-   * The selector is what angular internally uses
-   * for `document.querySelectorAll(selector)` in our index.html
-   * where, in this case, selector is the string 'home'.
-   */
-  selector: 'home',  // <home></home>
-  /**
-   * We need to tell Angular's Dependency Injection which providers are in our app.
-   */
-  providers: [
-    Title
-  ],
-  /**
-   * Our list of styles in our component. We may add more to compose many styles together.
-   */
-  styleUrls: [ './home.component.css' ],
-  /**
-   * Every Angular template is first compiled by the browser before Angular runs it's compiler.
-   */
-  templateUrl: './home.component.html'
+    selector: 'home',
+    styleUrls: ['./home.component.css'],
+    templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-  /**
-   * Set our default values
-   */
-  public localState = { value: '' };
-  /**
-   * TypeScript public modifiers
-   */
-  constructor(
-    public appState: AppState,
-    public title: Title
-  ) {}
+    stockArr: any;
+    constructor(private http: Http 
+    ) { }
 
-  public ngOnInit() {
-    console.log('hello `Home` component');
-    /**
-     * this.title.getData().subscribe(data => this.data = data);
-     */
-  }
+    chart: any = null;
+    dataPoints: any[] = [];
+    equity: any;
+    index: any;
+    symbol: string;
 
-  public submitState(value: string) {
-    console.log('submitState', value);
-    this.appState.set('value', value);
-    this.localState.value = '';
-  }
+    public ngOnInit() {
+        this.initChart()
+    }
+
+    initChart() {        
+        if (this.chart) {
+            this.chart = null;
+        }
+        this.dataPoints = [];
+        //this.symbol = this.getRandomSymbol()
+        this.symbol = 'MMM'
+        console.log('symbol', this.symbol);        
+        this.getEquity()
+    }
+
+    getEquity() {
+        //this.yahooStockService.get(this.equity)
+        //     .subscribe(result => this.processData(result))
+        this.http.get('./assets/stocks/' + this.symbol + '.json')
+            .map(r=>r.json())
+            .subscribe((result) => {
+                if ( result ) {
+                    //console.log('result', result)
+                    this.equity = result;
+                    //console.log('this.equity', this.equity)
+                    this.index = this.getRandom( 120, this.equity.length - 200); //random start day up until 200 days ago.
+                    this.processData(this.equity);
+                } else {
+                    this.initChart();
+                }
+            },(err) => {
+                this.initChart()
+            });
+    }
+
+    processData(result: any) {
+        this.stockArr = result;
+        for (var i = this.index - 120; i < this.index; i++) {
+            this.dataPoints.push(
+                {
+                    x: new Date(this.stockArr[i][0]),
+                    y: [
+                        this.round(+this.stockArr[i][1]),
+                        this.round(+this.stockArr[i][2]),
+                        this.round(+this.stockArr[i][3]),
+                        this.round(+this.stockArr[i][4])
+                    ]
+                }
+            )
+        }
+        this.showChart();
+    }
+
+    public showChart() {
+        this.chart = new CanvasJS.Chart("chartContainer",
+            {
+                title: {
+                    text: "",
+                },
+                exportEnabled: false,
+                axisY: {
+                    includeZero: false,
+                    prefix: "$",
+                },
+                axisX: {
+                    valueFormatString: "DD-MMM",
+                },
+                data: [
+                    {
+                        type: "candlestick",
+                        dataPoints: this.dataPoints
+                        
+                        // dataPoints: [
+                        //   {x: new Date('1970-01-01'), y:[99.91, 100.15, 99.33, 99.61]},
+                        //   {x: new Date('1970-01-02'), y:[100.12, 100.45, 99.28, 99.51]},
+                        //   {x: new Date('1970-01-03'), y:[99.28, 100.36, 99.27, 99.79]}                          
+                        // ]                     
+                    }
+                ]
+            });
+        //console.log('dataPoints before chart.render: ', this.dataPoints)
+        this.chart.render();
+    }
+        
+    round(num: number) {
+        return Math.round(num * 100) / 100;
+    }
+        //   between (min, max) ... (inclusive,exclusive)
+    getRandom(min: any, max: any) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
 }
