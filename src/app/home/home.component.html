@@ -1,14 +1,14 @@
 <div class="row">
-    <div class="col-xs-9">
+    <div class="col-sm-9">
         <div class="chart">
             <div id="chartContainer"></div>
         </div>
     </div>
-    <div class="col-xs-3">
+    <div class="col-sm-3 hidden-xs">
         <div class="portfolio">
         <h1>Portfolio</h1>
         <p>
-            Worth: ${{ accountValue }}
+            Value: ${{ accountValue }}
         </p>
         <p>
             Profit: <span *ngIf="profit != null">{{ profit }}%</span>
@@ -31,17 +31,38 @@
     </div>
 </div>
 
+<div class="row visible-xs portfolio--small">
+    <div class="col-xs-6">
+        Value: ${{ accountValue }}
+    </div>
+    <div class="col-xs-6">
+        Profit: <span *ngIf="profit != null">{{ profit }}%</span>
+    </div>
+</div>
+
 <div class="row">
-    <div class="buttons col-sm-12">
+    <div class="buttons col-xs-12">
         <div class="row">
-            <button (click)="initChart()" class="col-xs-6">Next Chart</button>
-            <button (click)="advanceChart()" class="col-xs-6">Advance</button><br><br>
+            <div class="button-container col-xs-6">
+                <button (click)="initChart()" >Next Chart</button>
+            </div>
+            <div class="button-container col-xs-6">
+                <button (click)="advanceChart()">Advance</button><br><br>
+            </div>
         </div>
         <div class="row">
-            <button *ngIf="!activePosition" (click)="buy()" class="col-xs-6">Buy</button>
-            <button *ngIf="!activePosition" (click)="short()" class="col-xs-6">Short</button>
-            <button *ngIf="activeShort" (click)="buyToCover()" class="col-xs-6">Buy to Cover</button>
-            <button *ngIf="activeLong" (click)="sellToClose(profit)" class="col-xs-6">Sell to Close</button>
+            <div class="button-container col-xs-6">
+                <button *ngIf="!activePosition" (click)="buy()">Buy</button>
+            </div>
+            <div class="button-container col-xs-6">
+                <button *ngIf="!activePosition" (click)="short()">Short</button>
+            </div>
+            <div class="button-container col-xs-6">
+                <button *ngIf="activeShort" (click)="buyToCover()">Buy to Cover</button>
+            </div>
+            <div class="button-container col-xs-6">
+                <button *ngIf="activeLong" (click)="sellToClose(profit)">Sell to Close</button>
+            </div>
         </div>
     </div>
 </div>

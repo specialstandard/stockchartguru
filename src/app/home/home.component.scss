@@ -1,6 +1,7 @@
 :host {
   display: block;
   padding: 0 16px;
+  max-width: 1074px;
 }
 
 .chart {
@@ -8,15 +9,28 @@
         max-width: 800px; 
         height:475px
     }
+    @media(max-width: 475px) {
+        //height: 100vw;
+    }
 }
 
 .portfolio {
     max-width: 240px;
+
+    &--small {
+        margin-left: 2px;
+        margin-right: -2px;
+        padding: 10px 15px;
+        border: 1px solid grey;
+        border-radius: 2px;
+    }
 }
 
 .buttons {
     button {
-        //max-width: 400px;
+        margin: 2px;
+        width: 100%;
+        max-width: 400px;
         min-width: 100px;
         height: 100px;
     }

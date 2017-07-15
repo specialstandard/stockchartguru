@@ -40,7 +40,7 @@ const APP_PROVIDERS = [
     FormsModule,
     HttpModule,
     ChartModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     SharedModule.forRoot()
   ],
   /**
