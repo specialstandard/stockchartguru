@@ -21,6 +21,8 @@
                     Total days traded: <span >{{ totalDaysInTrade }}</span><br>
                     APY: <span >{{ APY | number:'1.2-2' }}%</span><br>
                     Number Of Trades: <span >{{ numOfTrades }}</span><br>
+                    Last stock was: <span >{{ lastStockSymbol }}</span><br>
+
                     <!-- Ave Days Per Trade: <span >{{ averageDaysPerTrade | number:'1.2-2' }}</span>
                     Trades Won: <span >{{ numWon }}</span><br>
                     Trades Lost: <span >{{ numLost }}</span><br>
@@ -46,7 +48,7 @@
     <div class="buttons col-xs-12">
         <div class="row">
             <div class="button-container col-xs-6">
-                <button class="btn btn-primary" (click)="initChart()" >Next Chart</button>
+                <button class="btn btn-primary" (click)="onClickNextChart()" >Next Chart</button>
             </div>
             <div class="button-container col-xs-6">
                 <button class="btn btn-info" (click)="advanceChart()">Advance</button>

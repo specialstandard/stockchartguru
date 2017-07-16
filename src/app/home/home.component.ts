@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     equityValue: number = 0;
     index: number;
     isBatch: boolean = false;
+    lastStockSymbol: string = '';
     lossProfitBucket: number = 0;
     maxDesiredDaysInTrade: number = 40;
     maxStockPrice: number = 40;
@@ -67,6 +68,11 @@ export class HomeComponent implements OnInit {
         }
         this.averageDaysPerTrade = 0;
         this.initChart()
+    }
+
+    onClickNextChart() {
+        this.lastStockSymbol = this.symbol;
+        this.initChart();
     }
 
     initChart() {     
