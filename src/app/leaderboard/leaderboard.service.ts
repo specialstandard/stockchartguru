@@ -21,13 +21,13 @@ export class LeaderboardService {
         } else {
             this.localHighScore = {
                 score: 36000,
-                date: moment().format('MMMM Do YYYY, h:mm:ss a')
+                date: moment().format('MMMM Do YYYY, h:mm')
             }
         }
         if( this.scoreService.accountValue > this.localHighScore.score){
             this.localHighScore = {
                 score: this.scoreService.accountValue,
-                date: moment().format('MMMM Do YYYY, h:mm:ss a')
+                date: moment().format('MMMM Do YYYY, h:mm')
             }
             localStorage.setItem('stockChartGuru.localHighScore', JSON.stringify(this.localHighScore))
         }

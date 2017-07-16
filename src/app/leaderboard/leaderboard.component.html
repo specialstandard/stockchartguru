@@ -13,7 +13,8 @@
     <div class="jumbotron">
         <h1>Leaderboard</h1>
         <p>Here is your all-time highest account value:</p>
-        <p >${{localHighScore?.score}} : Date: {{localHighScore?.date}}</p>
+        <p>$<span class="value">{{localHighScore?.score}}</span></p>
+        <p>{{localHighScore?.date}}</p>
     </div>
     <a [routerLink]="['/chart']">
         <div class="alert alert-success">
