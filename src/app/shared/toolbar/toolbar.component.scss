@@ -27,3 +27,15 @@ img {
     width: 26px;
     margin-bottom: 7px;
 }
+
+.social-container {
+    float: right;
+    margin-top: 10px;
+    
+    .fb {
+        width: 30px;
+    }
+    .twitter {
+        width: 20px;
+    }
+}
