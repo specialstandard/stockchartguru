@@ -1,8 +1,10 @@
 declare var CanvasJS: any;
 import { Component, OnInit } from '@angular/core';
+import { ScoreService } from "../score/score.service";
 import { Http } from "@angular/http";
 import 'rxjs/Rx';
 import { SP500 } from './sp500'
+import { LeaderboardService } from "../leaderboard/leaderboard.service";
 
 @Component({
     selector: 'home',
@@ -10,7 +12,7 @@ import { SP500 } from './sp500'
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-    constructor(private http: Http) { }
+    constructor(private http: Http, private scoreService: ScoreService, private leaderboardService: LeaderboardService) { }
 
     accountValue: number;
     accountValueTmp: number = 0;
@@ -59,13 +61,16 @@ export class HomeComponent implements OnInit {
     winProfitBucket: number = 0;
 
     public ngOnInit() {
-        this.accountValue = this.startingAccountValue;
+        console.log('this.scoreService.accountValue: ', this.scoreService.accountValue)
+        if( this.scoreService.accountValue < this.startingAccountValue){
+            this.scoreService.accountValue = this.startingAccountValue;
+        }
         this.averageDaysPerTrade = 0;
         this.initChart()
     }
 
     initChart() {     
-        this.accountValueTmp = this.accountValue;
+        this.accountValueTmp = this.scoreService.accountValue;
         if ( this.activeLong ) {
             this.profit = this.round(((this.currentPrice - this.entryPrice) / this.entryPrice) * 100);
             this.sellToClose( this.profit );
@@ -89,8 +94,8 @@ export class HomeComponent implements OnInit {
     buy() {
         let closePrice = this.dataPoints[this.dataPoints.length - 1].y[3]
         this.entryPrice = closePrice;
-        this.equityValue = this.accountValue;
-        this.numShares = this.accountValue / closePrice;
+        this.equityValue = this.scoreService.accountValue;
+        this.numShares = this.scoreService.accountValue / closePrice;
         this.activePosition = true;
         this.activeLong = true;
         this.advanceChart()
@@ -99,7 +104,7 @@ export class HomeComponent implements OnInit {
     short() {
         let closePrice = this.dataPoints[this.dataPoints.length - 1].y[3]
         this.entryPrice = closePrice;
-        this.numShares = this.accountValue / closePrice;
+        this.numShares = this.scoreService.accountValue / closePrice;
         this.activePosition = true;
         this.activeShort = true;
         this.advanceChart()
@@ -120,7 +125,7 @@ export class HomeComponent implements OnInit {
                 }
             ) // If stock probably split, restart new chart.
             if (this.dataPoints[this.dataPoints.length-1] < .7 * this.dataPoints[this.dataPoints.length-2]) {
-                this.accountValue = this.accountValueTmp;
+                this.scoreService.accountValue = this.accountValueTmp;
                 this.activeLong = false;
                 this.activeShort = false;
                 this.initChart();
@@ -145,7 +150,8 @@ export class HomeComponent implements OnInit {
             this.daysInTrade += 1;
             this.profit = this.round(((this.currentPrice - this.entryPrice) / this.entryPrice) * 100);
             this.equityValue = (this.numShares * dataPoint.y[3])
-            this.accountValue = Math.round(this.equityValue);
+            this.scoreService.accountValue = Math.round(this.equityValue);
+            this.leaderboardService.setLocalHighScore();
         } else if (this.activeShort) {
             this.updateShort(dataPoint, this.dataPoints[this.dataPoints.length - 2])
         }
@@ -158,7 +164,8 @@ export class HomeComponent implements OnInit {
             this.profitPercentHigh = this.profit;
         }
         this.equityValue = (this.numShares * (lastDataPoint.y[3] - dataPoint.y[3]))
-        this.accountValue = Math.round(this.accountValue + this.equityValue);
+        this.scoreService.accountValue = Math.round(this.scoreService.accountValue + this.equityValue);
+        this.leaderboardService.setLocalHighScore();
     }
 
     sellToClose(profit: number){
@@ -171,14 +178,14 @@ export class HomeComponent implements OnInit {
             this.lossProfitBucket += this.profit;
         }
         this.equityValue = this.numShares * this.entryPrice * (1 + profit/100);
-        this.accountValue = Math.round(this.equityValue);
+        this.scoreService.accountValue = Math.round(this.equityValue);
         this.equityValue = 0;
         this.numShares = 0;
         this.activePosition = false;
         this.activeLong = false;
         this.profitPercentHigh = 0;
         this.totalDaysInTrade += this.daysInTrade;
-        this.totalProfit = (this.accountValue - this.startingAccountValue) / this.startingAccountValue;
+        this.totalProfit = (this.scoreService.accountValue - this.startingAccountValue) / this.startingAccountValue;
         this.APY = 100 * ( this.totalProfit / this.totalDaysInTrade ) * 252;
         this.numOfTrades++;
         this.averagePercentPerWin = this.winProfitBucket / this.numWon;
@@ -186,7 +193,7 @@ export class HomeComponent implements OnInit {
 
         this.averageDaysPerTrade = this.totalDaysInTrade/this.numOfTrades;
         let n = 252/this.averageDaysPerTrade;
-        let A = this.accountValue;
+        let A = this.scoreService.accountValue;
         let t = this.totalDaysInTrade/252;
         let P = this.startingAccountValue;
         this.APY = 100 * n * ( Math.pow( 10, (Math.log10(A/P) / (n*t) ) ) - 1 )
@@ -199,12 +206,12 @@ export class HomeComponent implements OnInit {
         this.activeShort = false;
         this.profitPercentHigh = 0;
         this.totalDaysInTrade += this.daysInTrade;
-        this.totalProfit = (this.accountValue - this.startingAccountValue) / this.startingAccountValue;
+        this.totalProfit = (this.scoreService.accountValue - this.startingAccountValue) / this.startingAccountValue;
         this.APY = 100 * ( this.totalProfit / this.totalDaysInTrade ) * 252;
         this.numOfTrades++;
         this.averageDaysPerTrade = this.totalDaysInTrade/this.numOfTrades;
         let n = 252/this.averageDaysPerTrade;
-        let A = this.accountValue;
+        let A = this.scoreService.accountValue;
         let t = this.totalDaysInTrade/252;
         let P = this.startingAccountValue;
         this.APY = 100 * n * ( Math.pow( 10, (Math.log10(A/P) / (n*t) ) ) - 1 )

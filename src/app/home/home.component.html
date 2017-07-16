@@ -9,7 +9,7 @@
             <h3>Portfolio:</h3>
             <div class="stats">
                 <p>
-                    Value: $<span class="value">{{ accountValue }}</span>
+                    Value: $<span class="value">{{ scoreService.accountValue }}</span>
                 </p>
                 <p>
                     Profit: <span *ngIf="profit != null">{{ profit }}%</span>
@@ -35,7 +35,7 @@
 
 <div class="row visible-xs portfolio--small">
     <div class="col-xs-6">
-        Value: $<span class="value">{{ accountValue }}</span>
+        Value: $<span class="value">{{ scoreService.accountValue }}</span>
     </div>
     <div class="col-xs-6">
         Profit: <span *ngIf="profit != null">{{ profit }}%</span>

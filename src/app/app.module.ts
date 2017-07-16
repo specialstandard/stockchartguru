@@ -12,7 +12,10 @@ import { ChartModule } from 'angular2-chartjs';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './home';
-import { AboutComponent } from "./about/about.component";
+import { AboutComponent } from './about/about.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { LeaderboardService } from './leaderboard/leaderboard.service';
+import { ScoreService } from "./score/score.service";
 import { SharedModule } from './shared/shared.module';
 
 import '../styles/styles.scss';
@@ -23,7 +26,6 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
 ];
 
-
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
@@ -32,6 +34,7 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     HomeComponent,
+    LeaderboardComponent,
     AboutComponent
   ],
   /**
@@ -50,7 +53,9 @@ const APP_PROVIDERS = [
    */
   providers: [
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    LeaderboardService,
+    ScoreService
   ]
 })
 export class AppModule {

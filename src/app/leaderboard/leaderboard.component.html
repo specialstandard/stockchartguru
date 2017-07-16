@@ -1,0 +1,24 @@
+<div class="container">
+    <!-- <div class="jumbotron">
+        <h1>Leaderboard</h1>
+        <p>Here are the all-time biggest money makers:</p>
+        <p *ngFor="let highScore of highScores">${{highScore.score}} : Date: {{highScore.date}}</p>
+    </div>
+    <a [routerLink]="['/chart']">
+        <div class="alert alert-success">
+            <strong>Get Started:</strong> Take me to the stock charts.
+        </div>
+    </a> -->
+
+    <div class="jumbotron">
+        <h1>Leaderboard</h1>
+        <p>Here is your all-time highest account value:</p>
+        <p >${{localHighScore?.score}} : Date: {{localHighScore?.date}}</p>
+    </div>
+    <a [routerLink]="['/chart']">
+        <div class="alert alert-success">
+            <strong>Get Started:</strong> Take me to the stock charts.
+        </div>
+    </a>
+
+</div>
