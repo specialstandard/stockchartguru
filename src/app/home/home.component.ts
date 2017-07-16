@@ -151,7 +151,6 @@ export class HomeComponent implements OnInit {
             this.profit = this.round(((this.currentPrice - this.entryPrice) / this.entryPrice) * 100);
             this.equityValue = (this.numShares * dataPoint.y[3])
             this.scoreService.accountValue = Math.round(this.equityValue);
-            this.leaderboardService.setLocalHighScore();
         } else if (this.activeShort) {
             this.updateShort(dataPoint, this.dataPoints[this.dataPoints.length - 2])
         }
@@ -165,7 +164,6 @@ export class HomeComponent implements OnInit {
         }
         this.equityValue = (this.numShares * (lastDataPoint.y[3] - dataPoint.y[3]))
         this.scoreService.accountValue = Math.round(this.scoreService.accountValue + this.equityValue);
-        this.leaderboardService.setLocalHighScore();
     }
 
     sellToClose(profit: number){
@@ -177,8 +175,7 @@ export class HomeComponent implements OnInit {
             this.numLost++;
             this.lossProfitBucket += this.profit;
         }
-        this.equityValue = this.numShares * this.entryPrice * (1 + profit/100);
-        this.scoreService.accountValue = Math.round(this.equityValue);
+        this.leaderboardService.setLocalHighScore();
         this.equityValue = 0;
         this.numShares = 0;
         this.activePosition = false;
@@ -200,6 +197,7 @@ export class HomeComponent implements OnInit {
     }
 
     buyToCover() {
+        this.leaderboardService.setLocalHighScore();
         this.equityValue = 0;
         this.numShares = 0;
         this.activePosition = false;
