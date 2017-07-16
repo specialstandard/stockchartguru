@@ -7,11 +7,12 @@
 .chart {
     #chartContainer {
         max-width: 800px; 
-        height:475px;
+        height:310px;
+        //height:475px;
 
-        @media(max-width: 768px) {
-            height: 310px;
-        }        
+        // @media(max-width: 768px) {
+        //     height: 310px;
+        // }        
     }
 }
 
