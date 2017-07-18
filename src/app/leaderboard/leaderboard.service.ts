@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
@@ -9,14 +9,15 @@ import { ScoreService } from "../score/score.service";
 
 @Injectable()
 export class LeaderboardService {
+    RESET_SCORE_VALUE: number = 36000;
 
     public GAMENAME: string = 'stockChartGuru';
     public localHighScore;
 
-    constructor(private http: Http, private scoreService: ScoreService){}
+    constructor(private http: Http, private scoreService: ScoreService) { }
 
-    setLocalHighScore(){
-        if(localStorage.getItem('stockChartGuru.localHighScore')) {
+    setLocalHighScore() {
+        if (localStorage.getItem('stockChartGuru.localHighScore')) {
             this.localHighScore = JSON.parse(localStorage.getItem('stockChartGuru.localHighScore'))
         } else {
             this.localHighScore = {
@@ -24,7 +25,7 @@ export class LeaderboardService {
                 date: moment().format('MMMM Do YYYY, H:mm')
             }
         }
-        if( this.scoreService.accountValue > this.localHighScore.score){
+        if (this.scoreService.accountValue > this.localHighScore.score) {
             this.localHighScore = {
                 score: this.scoreService.accountValue,
                 date: moment().format('MMMM Do YYYY, H:mm')
@@ -33,33 +34,41 @@ export class LeaderboardService {
         }
     }
 
-    getHighScores(): Observable<any> {
-        const url:string = 'http://52.40.114.1/leaderboard/highScores';
-        let body =  {
-            gameName: this.GAMENAME           
+    resetLocalHighScore() {
+        this.localHighScore = {
+            score: this.RESET_SCORE_VALUE,
+            date: moment().format('MMMM Do YYYY, H:mm')
         }
-        return this.http.post(url, body)
-                .map(r => r.json())                    
+        localStorage.setItem('stockChartGuru.localHighScore', JSON.stringify(this.localHighScore))
     }
 
-    postScore( score:number, date: moment.Moment ): Observable<any> {
+    getHighScores(): Observable<any> {
+        const url: string = 'http://52.40.114.1/leaderboard/highScores';
+        let body = {
+            gameName: this.GAMENAME
+        }
+        return this.http.post(url, body)
+            .map(r => r.json())
+    }
+
+    postScore(score: number, date: moment.Moment): Observable<any> {
         console.log(`score: ${score}. date: ${date}`);
-        const url:string = 'http://52.40.114.1/leaderboard/submitScore';
-        let body =  {
+        const url: string = 'http://52.40.114.1/leaderboard/submitScore';
+        let body = {
             gameName: this.GAMENAME,
             score,
             date
         }
-        return this.http.post(url, JSON.stringify(body))
-                .map(r => r.json())                    
+        return this.http.post(url, body)
+            .map(r => r.json())
     }
 
     removeHighScore(): Observable<any> {
-        const url:string = 'http://52.40.114.1/leaderboard/removeHighScore';
-        let body =  {
-            gameName: this.GAMENAME           
+        const url: string = 'http://52.40.114.1/leaderboard/removeHighScore';
+        let body = {
+            gameName: this.GAMENAME
         }
         return this.http.post(url, body)
-                .map(r => r.json())                    
+            .map(r => r.json())
     }
 }

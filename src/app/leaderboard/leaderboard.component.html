@@ -1,21 +1,25 @@
 <div class="container">
-    <!-- <div class="jumbotron">
-        <h1>Leaderboard</h1>
-        <p>Here are the all-time biggest money makers:</p>
-        <p *ngFor="let highScore of highScores">${{highScore.score}} : Date: {{highScore.date}}</p>
-    </div>
-    <a [routerLink]="['/chart']">
-        <div class="alert alert-success">
-            <strong>Get Started:</strong> Take me to the stock charts.
-        </div>
-    </a> -->
 
-    <div class="jumbotron">
-        <h1>Leaderboard</h1>
-        <p>Your all-time highest account value:</p>
-        <p>$<span class="value">{{localHighScore?.score}}</span></p>
-        <p>{{localHighScore?.date}}</p>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Leaderboard</div>
+        <div class="panel-body">
+            <p>The all-time biggest money makers:</p>
+            <p *ngFor="let highScore of highScores">${{highScore.score}} : Date: {{highScore.date}}</p>
+        </div>
     </div>
+    
+    <div class="panel panel-success">
+        <div class="panel-heading">Your all-time highest account value:</div>
+        <div class="panel-body">
+            <p>$<span class="value">{{localHighScore?.score}}</span></p>
+            <p>{{localHighScore?.date}}</p>
+            <button class="btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
+            <br>
+            <button class="btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
+
+        </div>
+    </div>
+
     <a [routerLink]="['/chart']">
         <div class="alert alert-success">
             <strong>Get Started:</strong> Take me to the stock charts.

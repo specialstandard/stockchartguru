@@ -17,7 +17,7 @@ export class LeaderboardComponent implements OnInit {
     localHighScore: any;
 
     public ngOnInit() {
-        //this.getHighScores(this.NUM_SCORES_TO_SHOW);
+        this.getHighScores(this.NUM_SCORES_TO_SHOW);
         this.leaderboardService.setLocalHighScore();
         this.localHighScore = this.leaderboardService.localHighScore
         console.log('this.localHighScore', this.localHighScore)
@@ -29,18 +29,29 @@ export class LeaderboardComponent implements OnInit {
             .subscribe((result) => {
                 if(result.highScores) {
                     this.highScores = result.highScores.slice(0, limit);
-                    if (this.isNewHighScore(this.scoreService.accountValue, this.highScores)) {
-                        this.postScore(this.scoreService.accountValue);
-                    }
                 }
             });
     }
 
-    postScore( score: number) {
-        const date: moment.Moment = moment();
-        this.leaderboardService.postScore( this.scoreService.accountValue, date)
+    postScore( score: number, date: moment.Moment) {
+        //const date: moment.Moment = moment();
+        this.leaderboardService.postScore( score, date)
+            .subscribe((result) => {
+                if(result.success) {
+                    this.getHighScores(this.NUM_SCORES_TO_SHOW);
+                }
+            })
     }
 
+    onClickSubmitScore() {
+        this.postScore(this.localHighScore.score, this.localHighScore.date);
+    }
+    
+    onClickResetLocalHighScore() {
+        this.leaderboardService.resetLocalHighScore();
+        this.localHighScore = this.leaderboardService.localHighScore
+    }
+    
     isNewHighScore(score: number, highScores: any): boolean {
         return highScores.some((highScore) => {
             return score > highScore.score;
