@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     equityValue: number = 0;
     index: number;
     isBatch: boolean = false;
+    isLoading: boolean = false;
     lastStockSymbol: string = '';
     lossProfitBucket: number = 0;
     maxDesiredDaysInTrade: number = 40;
@@ -130,7 +131,7 @@ export class HomeComponent implements OnInit {
                     ]
                 }
             ) // If stock probably split, restart new chart.
-            if (this.dataPoints[this.dataPoints.length-1] < .7 * this.dataPoints[this.dataPoints.length-2]) {
+            if (this.dataPoints[this.dataPoints.length-1][3] < .7 * this.dataPoints[this.dataPoints.length-2][3]) {
                 this.scoreService.accountValue = this.accountValueTmp;
                 this.activeLong = false;
                 this.activeShort = false;
@@ -144,6 +145,9 @@ export class HomeComponent implements OnInit {
     }
 
     update( dataPoint: any ) {
+        if( isNaN(dataPoint.y[0])) {
+            this.initChart();
+        }
         this.currentPrice = dataPoint.y[3];
         this.currentPriceLow = dataPoint.y[2];
         this.currentPriceHigh = dataPoint.y[1];
@@ -221,6 +225,7 @@ export class HomeComponent implements OnInit {
         this.APY = 100 * n * ( Math.pow( 10, (Math.log10(A/P) / (n*t) ) ) - 1 )
     }
     getEquity() {
+        this.isLoading = true;
         this.http.get('./assets/stocks/' + this.symbol + '.json')
             .map(r=>r.json())
             .subscribe((result) => {
@@ -229,6 +234,7 @@ export class HomeComponent implements OnInit {
                     this.equity = result;
                     //console.log('this.equity', this.equity)
                     this.index = this.getRandom( 120, this.equity.length - 200); //random start day up until 200 days ago.
+                    this.isLoading = false;
                     this.processData(this.equity);
                 } else {
                     this.initChart();
@@ -284,7 +290,7 @@ export class HomeComponent implements OnInit {
                 ]
             });
         //console.log('dataPoints before chart.render: ', this.dataPoints)
-        this.chart.render();
+            this.chart.render();
     }
         
     round(num: number) {

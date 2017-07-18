@@ -2,6 +2,9 @@
     <div class="col-sm-9">
         <div class="chart">
             <div id="chartContainer"></div>
+            <div class="loader" *ngIf="isLoading">
+                <img src="./assets/img/spinner.gif">
+            </div>
         </div>
     </div>
     <div class="col-sm-3 hidden-xs">
