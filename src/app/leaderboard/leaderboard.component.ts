@@ -14,6 +14,7 @@ export class LeaderboardComponent implements OnInit {
     
     NUM_SCORES_TO_SHOW: number = 10;
     highScores: any;
+    highScoresToday: any;
     localHighScore: any;
 
     public ngOnInit() {
@@ -28,10 +29,29 @@ export class LeaderboardComponent implements OnInit {
         this.leaderboardService.getHighScores()
             .subscribe((result) => {
                 if(result.highScores) {
-                    this.highScores = result.highScores.slice(0, limit);
+                    //this.highScores = result.highScores.slice(0, limit);
+                    this.highScores = result.highScores;
                 }
+                this.highScores.map((item) => {
+                    item.dateTime = moment(this.leaderboardService.dateFromObjectId(item._id));
+                    item.dateTimeFormatted = item.dateTime.format('MMMM Do YYYY')
+                    console.log('moment diff: ', +moment(moment().diff(moment(item.dateTime))).format('H').toString())
+                })
+                this.highScoresToday = this.highScores.filter((item) => {
+                    return +moment(moment().diff(moment(item.dateTime))).format('H').toString() < 14 // Less than 24 hours ago
+                })
+                console.log(this.highScoresToday)
             });
     }
+
+    // getHighScoresToday(limit: number) {
+    //     this.leaderboardService.getHighScoresToday()
+    //         .subscribe((result) => {
+    //             if(result.highScores) {
+    //                 this.highScores = result.highScores.slice(0, limit);
+    //             }
+    //         });
+    // }
 
     postScore( score: number, date: moment.Moment) {
         //const date: moment.Moment = moment();

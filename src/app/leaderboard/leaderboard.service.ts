@@ -9,12 +9,31 @@ import { ScoreService } from "../score/score.service";
 
 @Injectable()
 export class LeaderboardService {
-    RESET_SCORE_VALUE: number = 36000;
 
     public GAMENAME: string = 'stockChartGuru';
+    public lastPostId: string = '';
     public localHighScore;
+    public RESET_SCORE_VALUE: number = 36000;
+    public URL_GET_HIGH_SCORES: string;
+    public URL_POST_HIGH_SCORE: string;
 
-    constructor(private http: Http, private scoreService: ScoreService) { }
+    constructor(private http: Http, private scoreService: ScoreService) {
+        this.setupEnvironment();
+    }
+
+    setupEnvironment() {
+        if(this.isLocalhost()){ // Localhost
+            this.URL_GET_HIGH_SCORES = 'http://stockchartguru.com/api/highScores';
+            this.URL_POST_HIGH_SCORE = 'http://stockchartguru.com/api/submitScore';
+        } else { // Production
+            this.URL_GET_HIGH_SCORES = '/api/highScores';
+            this.URL_POST_HIGH_SCORE = '/api/submitScore';
+        }
+    }
+
+    isLocalhost(): boolean {
+        return window.location.host.indexOf('localhost') > -1;
+    }
 
     setLocalHighScore() {
         if (localStorage.getItem('stockChartGuru.localHighScore')) {
@@ -43,24 +62,26 @@ export class LeaderboardService {
     }
 
     getHighScores(): Observable<any> {
-        const url: string = 'http://52.40.114.1/leaderboard/highScores';
         let body = {
             gameName: this.GAMENAME
         }
-        return this.http.post(url, body)
+        return this.http.post(this.URL_GET_HIGH_SCORES, body)
             .map(r => r.json())
     }
 
     postScore(score: number, date: moment.Moment): Observable<any> {
         console.log(`score: ${score}. date: ${date}`);
-        const url: string = 'http://52.40.114.1/leaderboard/submitScore';
-        let body = {
+        const body = {
+            date,
             gameName: this.GAMENAME,
+            _id: this.lastPostId,
             score,
-            date
         }
-        return this.http.post(url, body)
+        return this.http.post(this.URL_POST_HIGH_SCORE, body)
             .map(r => r.json())
+            .do((x) => {
+                this.lastPostId = x._id
+            })
     }
 
     removeHighScore(): Observable<any> {
@@ -71,4 +92,8 @@ export class LeaderboardService {
         return this.http.post(url, body)
             .map(r => r.json())
     }
+    
+    dateFromObjectId = function (objectId) {
+        return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+    };
 }

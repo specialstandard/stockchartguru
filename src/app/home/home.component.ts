@@ -131,7 +131,8 @@ export class HomeComponent implements OnInit {
                     ]
                 }
             ) // If stock probably split, restart new chart.
-            if (this.dataPoints[this.dataPoints.length-1][3] < .7 * this.dataPoints[this.dataPoints.length-2][3]) {
+            if (this.dataPoints[this.dataPoints.length-1][3] < .7 * this.dataPoints[this.dataPoints.length-2][3]
+                || this.dataPoints[this.dataPoints.length-1][3] > 1.4 * this.dataPoints[this.dataPoints.length-2][3]) {
                 this.scoreService.accountValue = this.accountValueTmp;
                 this.activeLong = false;
                 this.activeShort = false;

@@ -1,14 +1,24 @@
 <div class="container">
 
     <div class="panel panel-primary">
-        <div class="panel-heading">Leaderboard</div>
+        <div class="panel-heading">All-time biggest money makers</div>
         <div class="panel-body">
-            <p>The all-time biggest money makers:</p>
-            <p *ngFor="let highScore of highScores">${{highScore.score}} : Date: {{highScore.date}}</p>
+            <div *ngFor="let highScore of highScores; let i = index">
+                <span *ngIf="i<10">${{highScore?.score}} : {{highScore?.dateTimeFormatted}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Today's biggest money makers:</div>
+        <div class="panel-body">
+            <div *ngFor="let highScoreToday of highScoresToday; let i = index">
+                <span *ngIf="i<10">${{highScoreToday?.score}} : {{highScoreToday?.dateTimeFormatted}}</span>
+            </div>
         </div>
     </div>
     
-    <div class="panel panel-success">
+    <div class="panel panel-info">
         <div class="panel-heading">Your all-time highest account value:</div>
         <div class="panel-body">
             <p>$<span class="value">{{localHighScore?.score}}</span></p>
