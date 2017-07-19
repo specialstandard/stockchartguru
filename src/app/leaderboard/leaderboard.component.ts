@@ -16,6 +16,7 @@ export class LeaderboardComponent implements OnInit {
     highScores: any;
     highScoresToday: any;
     localHighScore: any;
+    name: string = '';
 
     public ngOnInit() {
         this.getHighScores(this.NUM_SCORES_TO_SHOW);
@@ -53,9 +54,9 @@ export class LeaderboardComponent implements OnInit {
     //         });
     // }
 
-    postScore( score: number, date: moment.Moment) {
+    postScore( score: number, date: moment.Moment, name: string) {
         //const date: moment.Moment = moment();
-        this.leaderboardService.postScore( score, date)
+        this.leaderboardService.postScore( score, date, name)
             .subscribe((result) => {
                 if(result.success) {
                     this.getHighScores(this.NUM_SCORES_TO_SHOW);
@@ -64,7 +65,7 @@ export class LeaderboardComponent implements OnInit {
     }
 
     onClickSubmitScore() {
-        this.postScore(this.localHighScore.score, this.localHighScore.date);
+        this.postScore(this.localHighScore.score, this.localHighScore.date, this.name);
     }
     
     onClickResetLocalHighScore() {

@@ -69,13 +69,14 @@ export class LeaderboardService {
             .map(r => r.json())
     }
 
-    postScore(score: number, date: moment.Moment): Observable<any> {
+    postScore(score: number, date: moment.Moment, name: string): Observable<any> {
         console.log(`score: ${score}. date: ${date}`);
         const body = {
             date,
             gameName: this.GAMENAME,
             _id: this.lastPostId,
             score,
+            name
         }
         return this.http.post(this.URL_POST_HIGH_SCORE, body)
             .map(r => r.json())
