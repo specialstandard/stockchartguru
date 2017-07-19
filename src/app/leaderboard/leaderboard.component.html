@@ -23,7 +23,7 @@
         <div class="panel-body">
             <p>$<span class="value">{{localHighScore?.score}}</span></p>
             <p>{{localHighScore?.date}}</p>
-            <label>Name: <input class="username" maxlength="12" [(ngModel)]="username"></label>
+            <label>Name: <input class="username" maxlength="12" [(ngModel)]="name"></label>
             <button class="btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
             <br>
             <button class="btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
