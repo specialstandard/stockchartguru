@@ -28,3 +28,15 @@
     color: #5cb85c;
     font-size: 23px;
 }
+.social-container {
+    //float: right;
+    margin-top: 10px;
+    
+    .fb {
+        width: 200px;
+    }
+    .twitter {
+        width: 120px;
+        margin-left: 4px;
+    }
+}

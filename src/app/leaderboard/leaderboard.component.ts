@@ -17,6 +17,8 @@ export class LeaderboardComponent implements OnInit {
     highScoresToday: any;
     localHighScore: any;
     name: string = '';
+    twitterLink: string;
+    fbLink: string;
 
     public ngOnInit() {
         this.getHighScores(this.NUM_SCORES_TO_SHOW);
@@ -42,7 +44,13 @@ export class LeaderboardComponent implements OnInit {
                     return +moment(moment().diff(moment(item.dateTime))).format('H').toString() < 14 // Less than 24 hours ago
                 })
                 console.log(this.highScoresToday)
+                this.makeSocialLinks();
             });
+    }
+
+    makeSocialLinks() {
+        this.twitterLink = `http://twitter.com/share?text=I%20made%20$${this.localHighScore.score}%20on%20stockchartguru.com&url=http://stockchartguru.com&hashtags=stocks,trading,investing`
+        this.fbLink = `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstockchartguru.com%2F&amp;src=sdkpreparse`;
     }
 
     // getHighScoresToday(limit: number) {
