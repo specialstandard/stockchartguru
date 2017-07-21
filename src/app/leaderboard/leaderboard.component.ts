@@ -37,7 +37,7 @@ export class LeaderboardComponent implements OnInit {
                 }
                 this.highScores.map((item) => {
                     item.dateTime = moment(this.leaderboardService.dateFromObjectId(item._id));
-                    item.dateTimeFormatted = item.dateTime.format('MMMM Do YYYY')
+                    item.dateTimeFormatted = item.dateTime.format('MMM D YYYY')
                     console.log('moment diff: ', +moment(moment().diff(moment(item.dateTime))).format('H').toString())
                 })
                 this.highScoresToday = this.highScores.filter((item) => {

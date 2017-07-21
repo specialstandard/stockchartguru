@@ -4,7 +4,17 @@
         <div class="panel-heading">All-time Stock Chart Gurus:</div>
         <div class="panel-body">
             <div *ngFor="let highScore of highScores; let i = index">
-                <span *ngIf="i<10">${{highScore?.score}}: {{highScore?.name}}: {{highScore?.dateTimeFormatted}}</span>
+                <span *ngIf="i<10">
+                    <span class="score">
+                        ${{highScore?.score}}:
+                    </span>
+                    <span class="date">
+                        {{highScore?.dateTimeFormatted}}
+                    </span>
+                    <span class="name">
+                        {{highScore?.name}}
+                    </span>
+                </span>
             </div>
         </div>
     </div>
@@ -13,7 +23,14 @@
         <div class="panel-heading">Today's Stock Chart Gurus:</div>
         <div class="panel-body">
             <div *ngFor="let highScoreToday of highScoresToday; let i = index">
-                <span *ngIf="i<10">${{highScoreToday?.score}}: {{highScoreToday?.name}}: {{highScoreToday?.dateTimeFormatted}}</span>
+                <span *ngIf="i<10">
+                    <span class="score">
+                        ${{highScoreToday?.score}}:
+                    </span>
+                    <span class="name">
+                        {{highScoreToday?.name}}
+                    </span>
+                </span>
             </div>
         </div>
     </div>
