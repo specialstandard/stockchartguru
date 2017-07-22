@@ -8,18 +8,27 @@
 
 .panel {
 
+    .panel-body {
+        padding: 8px
+    }
+
     .score {
-        width: 73px;
+        width: 79px;
+        display: inline-block
+    }
+    .date {
+        width: 79px;
         display: inline-block
     }
     .name {
         text-align: center;
         display: inline-block
     }
-    .date {
-        width: 83px;
-        display: inline-block
-    }
+}
+
+.col-sm-6, .col-sm-12 {
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .btn {

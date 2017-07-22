@@ -44,36 +44,43 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-info">
-        <div class="panel-heading">Your highest account value:</div>
-        <div class="panel-body">
-            <div class="col-sm-6">
-                <p>
-                    $<span class="value">{{localHighScore?.score}}</span> {{localHighScore?.date}}
-                </p>
-                <label>Name: <input class="username" maxlength="15" [(ngModel)]="name"></label>
-                <br>
-                <button class="submit btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
-                <button class="reset btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
-            </div>
-            <div class="col-sm-6">
-                <span class="social-container">
-                    <a class="twitter"[href]="twitterLink" target="_blank">
-                        I made ${{localHighScore?.score}} on stockchartguru.com!
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">Your highest account value:</div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <p>
+                            $<span class="value">{{localHighScore?.score}}</span> {{localHighScore?.date}}
+                        </p>
+                        <label>Name: <input class="username" maxlength="15" [(ngModel)]="name"></label>
                         <br>
-                        <img class="twitter" src="./assets/img/tweet_this.jpg" alt="Tweet this" >
-                    </a>
-                    <a [href]="fbLink" target="_blank">
-                        <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
-                    </a>
-                </span>
+                        <button class="submit btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
+                        <button class="reset btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="social-container">
+                            <a class="twitter"[href]="twitterLink" target="_blank">
+                                I made ${{localHighScore?.score}} on stockchartguru.com!
+                                <br>
+                                <img class="twitter" src="./assets/img/tweet_this.jpg" alt="Tweet this" >
+                            </a>
+                            <a [href]="fbLink" target="_blank">
+                                <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <a [routerLink]="['/chart']">
-        <div class="alert alert-success">
-            <strong>Get Started:</strong> Take me to the stock charts.
+    <div class="row">
+        <div class="col-sm-12">
+            <a [routerLink]="['/chart']">
+                <div class="alert alert-success">
+                    <strong>Get Started:</strong> Take me to the stock charts.
+                </div>
+            </a>
         </div>
-    </a>
-
+    </div>
 </div>
