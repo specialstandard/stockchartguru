@@ -1,86 +1,88 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">All-time Top 10 Stock Chart Gurus:</div>
-                <div class="panel-body">
-                    <div *ngFor="let highScore of highScores; let i = index">
-                        <span *ngIf="i<10">
-                            <span class="score">
-                                ${{highScore?.score}}:
+<div class="leader-board">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">All-time Top 10 Stock Chart Gurus:</div>
+                    <div class="panel-body">
+                        <div *ngFor="let highScore of highScores; let i = index">
+                            <span *ngIf="i<10">
+                                <span class="score">
+                                    ${{highScore?.score}}:
+                                </span>
+                                <span class="date">
+                                    {{highScore?.dateTimeFormatted}}
+                                </span>
+                                <span class="name">
+                                    {{highScore?.name}}
+                                </span>
                             </span>
-                            <span class="date">
-                                {{highScore?.dateTimeFormatted}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Today's Top 10 Stock Chart Gurus:</div>
+                    <div class="panel-body">
+                        <div *ngFor="let highScoreToday of highScoresToday; let i = index">
+                            <span *ngIf="i<10">
+                                <span class="score">
+                                    ${{highScoreToday?.score}}:
+                                </span>
+                                <span class="name">
+                                    {{highScoreToday?.name}}
+                                </span>
+                                <!-- <span class="date">
+                                    {{highScoreToday?.dateTimeFormatted}}
+                                </span>
+                                <span class="date">
+                                    {{highScoreToday?.diff}}
+                                </span> -->
                             </span>
-                            <span class="name">
-                                {{highScore?.name}}
-                            </span>
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Today's Top 10 Stock Chart Gurus:</div>
-                <div class="panel-body">
-                    <div *ngFor="let highScoreToday of highScoresToday; let i = index">
-                        <span *ngIf="i<10">
-                            <span class="score">
-                                ${{highScoreToday?.score}}:
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Your highest account value:</div>
+                    <div class="panel-body">
+                        <div class="col-sm-6">
+                            <p>
+                                $<span class="value">{{localHighScore?.score}}</span> {{localHighScore?.date}}
+                            </p>
+                            <label>Name: <input class="username" maxlength="15" [(ngModel)]="name"></label>
+                            <br>
+                            <button class="submit btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
+                            <button class="reset btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="social-container">
+                                <a class="twitter"[href]="twitterLink" target="_blank">
+                                    I made ${{localHighScore?.score}} on stockchartguru.com!
+                                    <br>
+                                    <img class="twitter" src="./assets/img/tweet_this.jpg" alt="Tweet this" >
+                                </a>
+                                <a [href]="fbLink" target="_blank">
+                                    <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
+                                </a>
                             </span>
-                            <span class="name">
-                                {{highScoreToday?.name}}
-                            </span>
-                            <!-- <span class="date">
-                                {{highScoreToday?.dateTimeFormatted}}
-                            </span>
-                            <span class="date">
-                                {{highScoreToday?.diff}}
-                            </span> -->
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-info">
-                <div class="panel-heading">Your highest account value:</div>
-                <div class="panel-body">
-                    <div class="col-sm-6">
-                        <p>
-                            $<span class="value">{{localHighScore?.score}}</span> {{localHighScore?.date}}
-                        </p>
-                        <label>Name: <input class="username" maxlength="15" [(ngModel)]="name"></label>
-                        <br>
-                        <button class="submit btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
-                        <button class="reset btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
+        <div class="row">
+            <div class="col-sm-12">
+                <a [routerLink]="['/chart']">
+                    <div class="alert alert-success">
+                        <strong>Get Started:</strong> Take me to the stock charts.
                     </div>
-                    <div class="col-sm-6">
-                        <span class="social-container">
-                            <a class="twitter"[href]="twitterLink" target="_blank">
-                                I made ${{localHighScore?.score}} on stockchartguru.com!
-                                <br>
-                                <img class="twitter" src="./assets/img/tweet_this.jpg" alt="Tweet this" >
-                            </a>
-                            <a [href]="fbLink" target="_blank">
-                                <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
-                            </a>
-                        </span>
-                    </div>
-                </div>
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <a [routerLink]="['/chart']">
-                <div class="alert alert-success">
-                    <strong>Get Started:</strong> Take me to the stock charts.
-                </div>
-            </a>
         </div>
     </div>
 </div>
