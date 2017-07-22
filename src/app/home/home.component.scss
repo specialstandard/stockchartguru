@@ -27,6 +27,8 @@
 
 .portfolio {
     max-width: 240px;
+    padding-left: 0px;
+    padding-right: 0px;
     
     &--small {
         margin-left: 2px;
@@ -44,6 +46,10 @@
     .stats {
         font-weight: bold;
         font-size: 16px;
+
+        .last-stock {
+            font-size: 13px;
+        }
     }
 }
 .value {

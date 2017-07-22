@@ -5,6 +5,7 @@ import { Http } from "@angular/http";
 import 'rxjs/Rx';
 import { SP500 } from './sp500'
 import { LeaderboardService } from "../leaderboard/leaderboard.service";
+import * as moment from 'moment';
 
 @Component({
     selector: 'home',
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
     isBatch: boolean = false;
     isLoading: boolean = false;
     lastStockSymbol: string = '';
+    lastStockYear: string = '';
     lossProfitBucket: number = 0;
     maxDesiredDaysInTrade: number = 40;
     maxStockPrice: number = 40;
@@ -74,6 +76,7 @@ export class HomeComponent implements OnInit {
 
     onClickNextChart() {
         this.lastStockSymbol = this.symbol;
+        this.lastStockYear = moment(this.dataPoints[this.dataPoints.length-1].x).format('MMM YYYY')
         this.initChart();
     }
 
