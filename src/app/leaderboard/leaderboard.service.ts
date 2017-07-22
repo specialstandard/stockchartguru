@@ -85,14 +85,14 @@ export class LeaderboardService {
             })
     }
 
-    removeHighScore(): Observable<any> {
-        const url: string = 'http://52.40.114.1/leaderboard/removeHighScore';
-        let body = {
-            gameName: this.GAMENAME
-        }
-        return this.http.post(url, body)
-            .map(r => r.json())
-    }
+    // removeHighScore(): Observable<any> {
+    //     const url: string = 'http://52.40.114.1/leaderboard/removeHighScore';
+    //     let body = {
+    //         gameName: this.GAMENAME
+    //     }
+    //     return this.http.post(url, body)
+    //         .map(r => r.json())
+    // }
     
     dateFromObjectId = function (objectId) {
         return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);

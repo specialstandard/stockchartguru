@@ -1,40 +1,49 @@
 <div class="container">
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">All-time Stock Chart Gurus:</div>
-        <div class="panel-body">
-            <div *ngFor="let highScore of highScores; let i = index">
-                <span *ngIf="i<10">
-                    <span class="score">
-                        ${{highScore?.score}}:
-                    </span>
-                    <span class="date">
-                        {{highScore?.dateTimeFormatted}}
-                    </span>
-                    <span class="name">
-                        {{highScore?.name}}
-                    </span>
-                </span>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">All-time Stock Chart Gurus:</div>
+                <div class="panel-body">
+                    <div *ngFor="let highScore of highScores; let i = index">
+                        <span *ngIf="i<10">
+                            <span class="score">
+                                ${{highScore?.score}}:
+                            </span>
+                            <span class="date">
+                                {{highScore?.dateTimeFormatted}}
+                            </span>
+                            <span class="name">
+                                {{highScore?.name}}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Today's Stock Chart Gurus:</div>
+                <div class="panel-body">
+                    <div *ngFor="let highScoreToday of highScoresToday; let i = index">
+                        <span *ngIf="i<10">
+                            <span class="score">
+                                ${{highScoreToday?.score}}:
+                            </span>
+                            <span class="name">
+                                {{highScoreToday?.name}}
+                            </span>
+                            <!-- <span class="date">
+                                {{highScoreToday?.dateTimeFormatted}}
+                            </span>
+                            <span class="date">
+                                {{highScoreToday?.diff}}
+                            </span> -->
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">Today's Stock Chart Gurus:</div>
-        <div class="panel-body">
-            <div *ngFor="let highScoreToday of highScoresToday; let i = index">
-                <span *ngIf="i<10">
-                    <span class="score">
-                        ${{highScoreToday?.score}}:
-                    </span>
-                    <span class="name">
-                        {{highScoreToday?.name}}
-                    </span>
-                </span>
-            </div>
-        </div>
-    </div>
-    
     <div class="panel panel-info">
         <div class="panel-heading">Your all-time highest account value:</div>
         <div class="panel-body">
@@ -51,6 +60,7 @@
                 <span class="social-container">
                     <a [href]="twitterLink" target="_blank">
                         I made ${{localHighScore?.score}} on stockchartguru.com!
+                        <br>
                         <img class="twitter" src="./assets/img/tweet_this.jpg" alt="Tweet this" >
                     </a>
                     <a [href]="fbLink" target="_blank">

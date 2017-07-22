@@ -41,7 +41,11 @@ export class LeaderboardComponent implements OnInit {
                     console.log('moment diff: ', +moment(moment().diff(moment(item.dateTime))).format('H').toString())
                 })
                 this.highScoresToday = this.highScores.filter((item) => {
-                    return +moment(moment().diff(moment(item.dateTime))).format('H').toString() < 14 // Less than 24 hours ago
+                    //return +moment(moment().diff(moment(item.dateTime))).format('H').toString() < 14 // Less than 24 hours ago
+                    let now = moment();
+                    let diff = moment.duration(now.diff(item.dateTime)).asHours();
+                    console.log('diff ', diff)
+                    return diff < 24; 
                 })
                 console.log(this.highScoresToday)
                 this.makeSocialLinks();
