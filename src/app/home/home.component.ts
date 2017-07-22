@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
     profit: number;
     profitLimitTriggered: boolean = false;
     profitPercentHigh: number = 0;
+    showStatsModal: boolean = false;
     sp500: string[] = SP500;
     startingAccountValue: number = 36000;
     stock: any;
@@ -313,5 +314,13 @@ export class HomeComponent implements OnInit {
         } else {
             return symbol;
         }
+    }
+
+    onClickStats() {
+        this.showStatsModal = !this.showStatsModal;
+    }
+
+    onClickCloseStats() {
+        this.showStatsModal = false;
     }
 }

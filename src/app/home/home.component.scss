@@ -1,13 +1,36 @@
 :host {
   display: block;
-  padding: 0 16px;
+  padding: 0 8px;
   max-width: 1074px;
 }
 
 .chart {
+    position: relative;
     #chartContainer {
         max-width: 800px; 
         height:310px;      
+    }
+
+    .stats-modal {
+        position: absolute;
+        top: 58px;
+        left: 50px;
+        width: 200px;
+        padding: 4px;
+        border: 1px solid #222;
+        background-color: #fff;
+        border-radius: 4px;
+        z-index: 10;
+        opacity: .8;
+
+        .close-button {
+            position: absolute;
+            top: -4px;
+            right: 5px;
+            font-weight: bold;
+            font-size: 31px;
+            opacity: .8;
+        }
     }
 }
 
@@ -38,6 +61,28 @@
         border-radius: 4px;
         font-weight: bold;
         font-size: 18px;
+
+        .value-container {
+            // padding-left: 2px;
+            // padding-right: 1px;
+        }
+        .profit {
+            padding-left: 0px;
+            padding-right: 2px;
+        }
+
+        .button-stats {
+            display: inline-block;
+            position:relative;
+
+            button {
+                float: right;
+                font-weight: bold;
+                height: 53px;
+                width: 62px;
+                padding: 0px;
+            }
+        }
     }
 
     h3 {

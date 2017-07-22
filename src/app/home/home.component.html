@@ -1,6 +1,27 @@
 <div class="row">
     <div class="col-sm-9">
         <div class="chart">
+            <div class="stats-modal" *ngIf="showStatsModal">
+                <div class="close-button" (click)="onClickCloseStats()">
+                    &times;
+                </div>
+                <p >
+                    Entry Price: <span *ngIf="entryPrice != 0">{{ entryPrice }}</span><br>
+                    Current Price: <span *ngIf="currentPrice !=0">{{ currentPrice }}</span><br>
+                    Days this trade: <span >{{ daysInTrade }}</span><br>
+                    Total days traded: <span >{{ totalDaysInTrade }}</span><br>
+                    APY: <span >{{ APY | number:'1.2-2' }}%</span><br>
+                    Number Of Trades: <span >{{ numOfTrades }}</span><br>
+                    Last stock: <span class="last-stock">{{ lastStockSymbol }} {{lastStockYear}}</span><br>
+
+                    <!-- Ave Days Per Trade: <span >{{ averageDaysPerTrade | number:'1.2-2' }}</span>
+                    Trades Won: <span >{{ numWon }}</span><br>
+                    Trades Lost: <span >{{ numLost }}</span><br>
+                    Ave PPW: <span >{{ averagePercentPerWin | number:'1.2-2' }}%</span><br>
+                    Ave PPL: <span >{{ averagePercentPerLoss | number:'1.2-2' }}%</span><br>
+                    Won <span >{{ 100*numWon/numOfTrades | number:'1.2-2' }}%</span><br> -->
+                </p>
+            </div>
             <div id="chartContainer"></div>
             <div class="loader" *ngIf="isLoading">
                 <img src="./assets/img/spinner.gif">
@@ -39,11 +60,13 @@
 </div>
 
 <div class="row visible-xs portfolio--small">
-    <div class="col-xs-6">
+    <div class="value-container col-xs-9">
         Value: $<span class="value">{{ scoreService.accountValue }}</span>
-    </div>
-    <div class="col-xs-6">
+        <br>
         Profit: <span *ngIf="profit != null">{{ profit }}%</span>
+    </div>
+    <div class="button-stats col-xs-3">
+        <button class="btn btn-default" (click)="onClickStats()">STATS</button>
     </div>
 </div>
 
