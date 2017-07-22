@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     profitLimitTriggered: boolean = false;
     profitPercentHigh: number = 0;
     sp500: string[] = SP500;
-    startingAccountValue: number = 50000;
+    startingAccountValue: number = 36000;
     stock: any;
     stockArr: string[];
     stopLossPercent: number = 11;

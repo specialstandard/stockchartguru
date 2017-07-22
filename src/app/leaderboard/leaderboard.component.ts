@@ -78,7 +78,9 @@ export class LeaderboardComponent implements OnInit {
     }
 
     onClickSubmitScore() {
-        this.postScore(this.localHighScore.score, this.localHighScore.date, this.name);
+        if (this.name) {
+            this.postScore(this.localHighScore.score, this.localHighScore.date, this.name);
+        }
     }
     
     onClickResetLocalHighScore() {
