@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LeaderboardService } from './leaderboard.service';
 import { ScoreService } from "../score/score.service";
 import * as moment from 'moment';
@@ -6,7 +6,8 @@ import * as moment from 'moment';
 @Component({
     selector: 'leaderboard',
     styleUrls: ['./leaderboard.component.scss'],
-    templateUrl: './leaderboard.component.html'
+    templateUrl: './leaderboard.component.html',
+    //encapsulation: ViewEncapsulation.None
 })
 export class LeaderboardComponent implements OnInit {
     

@@ -1,5 +1,5 @@
 declare var CanvasJS: any;
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ScoreService } from "../score/score.service";
 import { Http } from "@angular/http";
 import 'rxjs/Rx';
@@ -9,7 +9,8 @@ import { LeaderboardService } from "../leaderboard/leaderboard.service";
 @Component({
     selector: 'home',
     styleUrls: ['./home.component.scss'],
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
+    //encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
     constructor(private http: Http, private scoreService: ScoreService, private leaderboardService: LeaderboardService) { }
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
     profitLimitTriggered: boolean = false;
     profitPercentHigh: number = 0;
     sp500: string[] = SP500;
-    startingAccountValue: number = 36000;
+    startingAccountValue: number = 50000;
     stock: any;
     stockArr: string[];
     stopLossPercent: number = 11;

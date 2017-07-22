@@ -7,9 +7,9 @@
 }
 
 .panel {
-    margin-top: 30px;
+
     .score {
-        width: 74px;
+        width: 73px;
         display: inline-block
     }
     .name {
@@ -24,11 +24,18 @@
 
 .btn {
     width: 176px;
+
+    &.submit {
+        width: 112px;
+        font-size: 11px;
+    }
+
+    &.reset {
+        width: 112px;
+        font-size: 11px;
+    }
 }
 
-.btn-reset {
-    margin-top: 10px;
-}
 .username {
     width: 130px;
     border-radius: 4px;
@@ -45,10 +52,11 @@
     margin-top: 20px;
     
     .fb {
-        width: 200px;
+        width: 146px;
         margin-left: -4px;
     }
     .twitter {
-        width: 120px;
+        width: 80px;
+        font-size: 13px;
     }
 }

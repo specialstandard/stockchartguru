@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">All-time Stock Chart Gurus:</div>
+                <div class="panel-heading">All-time Top 10 Stock Chart Gurus:</div>
                 <div class="panel-body">
                     <div *ngFor="let highScore of highScores; let i = index">
                         <span *ngIf="i<10">
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">Today's Stock Chart Gurus:</div>
+                <div class="panel-heading">Today's Top 10 Stock Chart Gurus:</div>
                 <div class="panel-body">
                     <div *ngFor="let highScoreToday of highScoresToday; let i = index">
                         <span *ngIf="i<10">
@@ -45,20 +45,20 @@
         </div>
     </div>
     <div class="panel panel-info">
-        <div class="panel-heading">Your all-time highest account value:</div>
+        <div class="panel-heading">Your highest account value:</div>
         <div class="panel-body">
             <div class="col-sm-6">
-                <p>$<span class="value">{{localHighScore?.score}}</span></p>
-                <p>{{localHighScore?.date}}</p>
+                <p>
+                    $<span class="value">{{localHighScore?.score}}</span> {{localHighScore?.date}}
+                </p>
                 <label>Name: <input class="username" maxlength="15" [(ngModel)]="name"></label>
                 <br>
-                <button class="btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
-                <br>
-                <button class="btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
+                <button class="submit btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
+                <button class="reset btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
             </div>
             <div class="col-sm-6">
                 <span class="social-container">
-                    <a [href]="twitterLink" target="_blank">
+                    <a class="twitter"[href]="twitterLink" target="_blank">
                         I made ${{localHighScore?.score}} on stockchartguru.com!
                         <br>
                         <img class="twitter" src="./assets/img/tweet_this.jpg" alt="Tweet this" >

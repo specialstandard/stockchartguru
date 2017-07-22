@@ -19,6 +19,7 @@ export class LeaderboardService {
 
     constructor(private http: Http, private scoreService: ScoreService) {
         this.setupEnvironment();
+        this.setupLastPostId();
     }
 
     setupEnvironment() {
@@ -41,13 +42,13 @@ export class LeaderboardService {
         } else {
             this.localHighScore = {
                 score: 36000,
-                date: moment().format('MMMM Do YYYY, H:mm')
+                date: moment().format('MMM D YYYY, H:mm')
             }
         }
         if (this.scoreService.accountValue > this.localHighScore.score) {
             this.localHighScore = {
                 score: this.scoreService.accountValue,
-                date: moment().format('MMMM Do YYYY, H:mm')
+                date: moment().format('MMM D YYYY, H:mm')
             }
             localStorage.setItem('stockChartGuru.localHighScore', JSON.stringify(this.localHighScore))
         }
@@ -56,9 +57,11 @@ export class LeaderboardService {
     resetLocalHighScore() {
         this.localHighScore = {
             score: this.RESET_SCORE_VALUE,
-            date: moment().format('MMMM Do YYYY, H:mm')
+            date: moment().format('MMM D YYYY, H:mm')
         }
         localStorage.setItem('stockChartGuru.localHighScore', JSON.stringify(this.localHighScore))
+        this.lastPostId = ''
+        localStorage.setItem('stockChartGuru.lastPostId', JSON.stringify(this.lastPostId))
     }
 
     getHighScores(): Observable<any> {
@@ -82,6 +85,7 @@ export class LeaderboardService {
             .map(r => r.json())
             .do((x) => {
                 this.lastPostId = x._id
+                localStorage.setItem('stockChartGuru.lastPostId', JSON.stringify(this.lastPostId))
             })
     }
 
@@ -97,4 +101,10 @@ export class LeaderboardService {
     dateFromObjectId = function (objectId) {
         return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
     };
+
+    setupLastPostId() {
+        if (localStorage.getItem('stockChartGuru.lastPostId')) {
+            this.lastPostId = JSON.parse(localStorage.getItem('stockChartGuru.lastPostId'))
+        }
+    }
 }
