@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit {
         if ( this.profit > this.profitPercentHigh ) {
             this.profitPercentHigh = this.profit;
         }
-        this.scoreService.accountValue = Math.round(this.equityValue);
+        this.scoreService.accountValue = this.entryEquityValue + Math.round(this.entryEquityValue - this.numShares * dataPoint.y[3]);
     }
 
     sellToClose(profit: number){
