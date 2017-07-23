@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
         }
         this.dataPoints = [];
         this.symbol = this.getRandomSymbol()
-        //this.symbol = 'COG' // Select particular stock symbol
+        // this.symbol = 'HPQ' // Select particular stock symbol for DEBUG
         console.log('symbol', this.symbol);        
         this.getEquity()
     }
@@ -143,7 +143,7 @@ export class HomeComponent implements OnInit {
             )
             // Check and handle stock split:
             let stockPriceRatio = this.dataPoints[this.dataPoints.length-2].y[3] / this.dataPoints[this.dataPoints.length-1].y[0]
-            if (stockPriceRatio > 1.9 && stockPriceRatio < 2.1) { // Stock probably split in half so double the number of shares held.
+            if (stockPriceRatio > 1.8 && stockPriceRatio < 2.2) { // Stock probably split in half so double the number of shares held.
                 this.numShares = this.numShares * 2;
             }
             this.index++
@@ -243,6 +243,7 @@ export class HomeComponent implements OnInit {
                     this.equity = result;
                     //console.log('this.equity', this.equity)
                     this.index = this.getRandom( 120, this.equity.length - 200); //random start day up until 200 days ago.
+                    // this.index = 200; // Choose specific dataPoint for DEBUG
                     this.isLoading = false;
                     this.processData(this.equity);
                 } else {
