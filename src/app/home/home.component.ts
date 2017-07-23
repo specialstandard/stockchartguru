@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
     daysInTrade: number = 0;
     daysToTest: number = 252;
     entryPrice: number = 0;
+    entryEquityValue: number = 0;
     equity: any;
     equityValue: number = 0;
     index: number;
@@ -90,6 +91,7 @@ export class HomeComponent implements OnInit {
             this.buyToCover();
         }
         this.entryPrice = 0;
+        this.entryEquityValue = 0;
         this.currentPrice = 0;
         this.daysInTrade = 0;
         this.profit = 0;
@@ -99,6 +101,7 @@ export class HomeComponent implements OnInit {
         }
         this.dataPoints = [];
         this.symbol = this.getRandomSymbol()
+        //this.symbol = 'COG' // Select particular stock symbol
         console.log('symbol', this.symbol);        
         this.getEquity()
     }
@@ -108,6 +111,7 @@ export class HomeComponent implements OnInit {
         this.entryPrice = closePrice;
         this.equityValue = this.scoreService.accountValue;
         this.numShares = this.scoreService.accountValue / closePrice;
+        this.entryEquityValue = this.numShares * this.entryPrice;
         this.activePosition = true;
         this.activeLong = true;
         this.advanceChart()
@@ -117,6 +121,7 @@ export class HomeComponent implements OnInit {
         let closePrice = this.dataPoints[this.dataPoints.length - 1].y[3]
         this.entryPrice = closePrice;
         this.numShares = this.scoreService.accountValue / closePrice;
+        this.entryEquityValue = this.numShares * this.entryPrice;
         this.activePosition = true;
         this.activeShort = true;
         this.advanceChart()
@@ -135,13 +140,11 @@ export class HomeComponent implements OnInit {
                         this.round(+this.stockArr[this.index][4])
                     ]
                 }
-            ) // If stock probably split, restart new chart.
-            if (this.dataPoints[this.dataPoints.length-1][3] < .7 * this.dataPoints[this.dataPoints.length-2][3]
-                || this.dataPoints[this.dataPoints.length-1][3] > 1.4 * this.dataPoints[this.dataPoints.length-2][3]) {
-                this.scoreService.accountValue = this.accountValueTmp;
-                this.activeLong = false;
-                this.activeShort = false;
-                this.initChart();
+            )
+            // Check and handle stock split:
+            let stockPriceRatio = this.dataPoints[this.dataPoints.length-2].y[3] / this.dataPoints[this.dataPoints.length-1].y[0]
+            if (stockPriceRatio > 1.9 && stockPriceRatio < 2.1) { // Stock probably split in half so double the number of shares held.
+                this.numShares = this.numShares * 2;
             }
             this.index++
             this.update(this.dataPoints[this.dataPoints.length - 1]);
@@ -164,8 +167,8 @@ export class HomeComponent implements OnInit {
             this.currentPriceHigh = dataPoint.y[1];
             //let lowProfit = this.round(((dataPoint.y[2] - this.entryPrice) / this.entryPrice) * 100);
             this.daysInTrade += 1;
-            this.profit = this.round(((this.currentPrice - this.entryPrice) / this.entryPrice) * 100);
             this.equityValue = (this.numShares * dataPoint.y[3])
+            this.profit = this.round(((this.equityValue - this.entryEquityValue) / this.entryEquityValue) * 100);
             this.scoreService.accountValue = Math.round(this.equityValue);
         } else if (this.activeShort) {
             this.updateShort(dataPoint, this.dataPoints[this.dataPoints.length - 2])
@@ -174,12 +177,12 @@ export class HomeComponent implements OnInit {
 
     updateShort( dataPoint: any, lastDataPoint: any ) {
         this.daysInTrade += 1;
-        this.profit = this.round(-((this.currentPrice - this.entryPrice) / this.entryPrice) * 100);
+        this.equityValue = (this.numShares * dataPoint.y[3])
+        this.profit = this.round(-((this.equityValue - this.entryEquityValue) / this.entryEquityValue) * 100 );
         if ( this.profit > this.profitPercentHigh ) {
             this.profitPercentHigh = this.profit;
         }
-        this.equityValue = (this.numShares * (lastDataPoint.y[3] - dataPoint.y[3]))
-        this.scoreService.accountValue = Math.round(this.scoreService.accountValue + this.equityValue);
+        this.scoreService.accountValue = Math.round(this.equityValue);
     }
 
     sellToClose(profit: number){
