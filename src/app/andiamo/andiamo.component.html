@@ -16,6 +16,9 @@
                                 <span class="name">
                                     {{highScore?.name}}
                                 </span>
+                                <span (click)="removeScore(highScore?.score)">
+                                    remove
+                                </span>
                             </span>
                         </div>
                     </div>
@@ -32,6 +35,9 @@
                                 </span>
                                 <span class="name">
                                     {{highScoreToday?.name}}
+                                </span>
+                                <span (click)="removeScore(highScoreToday?.score)">
+                                    remove
                                 </span>
                                 <!-- <span class="date">
                                     {{highScoreToday?.dateTimeFormatted}}
@@ -70,10 +76,7 @@
                                     <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
                                 </a>
                             </span>
-                            <div class="fb-like col-sm-12">
-                                <fb-like href="http://stockchartguru.com"></fb-like>
-                            </div>
-                        </div>                       
+                        </div>
                     </div>
                 </div>
             </div>

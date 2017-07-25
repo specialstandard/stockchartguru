@@ -78,7 +78,7 @@ export class LeaderboardService {
         let nameCut = name.slice(0, 14);
         console.log(`score: ${score}. date: ${date}`);
         var message = `${score}${nameCut}`
-        var dateTimeStamp = cryptojs.MD5(message + '23480492039484209348').toString();     
+        var dateTimeStamp = cryptojs.MD5(message + 'function').toString();     
         const body = {
             date,
             gameName: this.GAMENAME,

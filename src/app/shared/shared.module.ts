@@ -5,21 +5,26 @@ import { RouterModule } from '@angular/router';
 
 import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
+import { FacebookModule } from "ngx-facebook/dist/esm";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FacebookModule.forRoot()
+    ],
+    declarations: [ToolbarComponent, NavbarComponent],
+    exports: [ToolbarComponent, NavbarComponent,
+        CommonModule, FormsModule, RouterModule]
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule
-    };
-  }
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedModule
+        };
+    }
 }

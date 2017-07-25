@@ -13,14 +13,16 @@ import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about/about.component';
+import { AndiamoComponent } from "./andiamo/andiamo.component";
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LeaderboardService } from './leaderboard/leaderboard.service';
 import { ScoreService } from "./score/score.service";
 import { SharedModule } from './shared/shared.module';
 
+import { FacebookModule } from 'ngx-facebook';
+
 import '../styles/styles.scss';
 import '../styles/headings.css';
-import { AndiamoComponent } from "./andiamo/andiamo.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -48,6 +50,7 @@ const APP_PROVIDERS = [
     HttpModule,
     ChartModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    FacebookModule.forRoot(),
     SharedModule.forRoot()
   ],
   /**

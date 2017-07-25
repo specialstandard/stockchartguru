@@ -25,15 +25,18 @@ h1 {
 
 img {
     width: 26px;
-    margin-bottom: 7px;
 }
 
 .social-container {
     float: right;
     margin-top: 10px;
     
-    .fb {
-        width: 30px;
+    .btn-fb {
+        font-size: 14px;
+        color: #fff;
+        padding: 3px;
+        background-color: #3b5998;
+        border: 1px solid #8b9dc3;
     }
     .twitter {
         width: 20px;

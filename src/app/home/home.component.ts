@@ -5,7 +5,9 @@ import { Http } from "@angular/http";
 import 'rxjs/Rx';
 import { SP500 } from './sp500'
 import { LeaderboardService } from "../leaderboard/leaderboard.service";
+
 import * as moment from 'moment';
+import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 
 @Component({
     selector: 'home',
@@ -14,8 +16,18 @@ import * as moment from 'moment';
     //encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-    constructor(private http: Http, private scoreService: ScoreService, private leaderboardService: LeaderboardService) { }
+    constructor(
+        private http: Http,
+        private scoreService: ScoreService,
+        private leaderboardService: LeaderboardService,
+        private fbService: FacebookService) { }
 
+
+    initParams: InitParams = { // For Facebook
+      appId: '1846116319035890',
+      xfbml: true,
+      version: 'v2.8'
+    };
     accountValue: number;
     accountValueTmp: number = 0;
     activeLong: boolean = false;
@@ -68,12 +80,19 @@ export class HomeComponent implements OnInit {
     winProfitBucket: number = 0;
 
     public ngOnInit() {
-        console.log('this.scoreService.accountValue: ', this.scoreService.accountValue)
+        this.fbService.init(this.initParams);
+        //console.log('this.scoreService.accountValue: ', this.scoreService.accountValue)
         if( this.scoreService.accountValue < this.startingAccountValue){
             this.scoreService.accountValue = this.startingAccountValue;
         }
         this.averageDaysPerTrade = 0;
         this.initChart()
+    }
+
+    loginWithFacebook(): void {
+        this.fbService.login()
+        .then((response: LoginResponse) => console.log(response))
+        .catch((error: any) => console.error(error));
     }
 
     onClickNextChart() {
