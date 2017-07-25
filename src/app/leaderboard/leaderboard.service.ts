@@ -6,6 +6,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import * as moment from 'moment';
 import { ScoreService } from "../score/score.service";
+import * as cryptojs from 'crypto-js';
+import * as circularjson from 'circular-json'
 
 @Injectable()
 export class LeaderboardService {
@@ -73,13 +75,17 @@ export class LeaderboardService {
     }
 
     postScore(score: number, date: moment.Moment, name: string): Observable<any> {
+        let nameCut = name.slice(0, 14);
         console.log(`score: ${score}. date: ${date}`);
+        var message = `${score}${nameCut}`
+        var dateTimeStamp = cryptojs.MD5(message + '23480492039484209348').toString();     
         const body = {
             date,
             gameName: this.GAMENAME,
             _id: this.lastPostId,
             score,
-            name
+            name: nameCut,
+            dateTimeStamp: dateTimeStamp
         }
         return this.http.post(this.URL_POST_HIGH_SCORE, body)
             .map(r => r.json())
@@ -87,6 +93,22 @@ export class LeaderboardService {
                 this.lastPostId = x._id
                 localStorage.setItem('stockChartGuru.lastPostId', JSON.stringify(this.lastPostId))
             })
+    }
+
+    postTest(): Observable<any> {
+    // Encrypt 
+    // var ciphertext = cryptojs.AES.encrypt('my message', 'secret key 123');
+    var ciphertext = cryptojs.MD5('my message', 'imbrianimamazing').toString();
+
+    // Decrypt 
+    // var bytes  = cryptojs.AES.decrypt(ciphertext.toString(), 'secret key 123');
+    // var plaintext = bytes.toString(cryptojs.enc.Utf8);
+        const body = {
+            test: 'testtt',
+            ciphertext: ciphertext
+        }
+        return this.http.post('http://stockchartguru.com/api/postTest', body)
+            .map(r => r.json())           
     }
 
     // removeHighScore(): Observable<any> {
@@ -102,7 +124,17 @@ export class LeaderboardService {
         return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
     };
 
+    removeScore(score: number) {
+        let obj = {score: score}
+        return this.http.post('http://stockchartguru.com/api/andiamo', obj)
+            .map(r => r.json())  
+    }
+
     setupLastPostId() {
+        if (localStorage.getItem('stockChartGuru.lastPostId') === undefined) {
+            this.lastPostId = ''
+            localStorage.setItem('stockChartGuru.lastPostId', JSON.stringify(this.lastPostId))
+        } 
         if (localStorage.getItem('stockChartGuru.lastPostId')) {
             this.lastPostId = JSON.parse(localStorage.getItem('stockChartGuru.lastPostId'))
         }

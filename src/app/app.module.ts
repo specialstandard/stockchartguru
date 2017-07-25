@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { AndiamoComponent } from "./andiamo/andiamo.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -35,7 +36,8 @@ const APP_PROVIDERS = [
     AppComponent,
     HomeComponent,
     LeaderboardComponent,
-    AboutComponent
+    AboutComponent,
+    AndiamoComponent
   ],
   /**
    * Import Angular's modules.

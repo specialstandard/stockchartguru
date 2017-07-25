@@ -36,7 +36,7 @@
                     Value: $<span class="value">{{ scoreService.accountValue }}</span>
                 </p>
                 <p>
-                    Profit: <span *ngIf="profit != null">{{ profit }}%</span>
+                    Profit: <span [class.positive]="profit>0" [class.negative]="profit<0" *ngIf="profit != null">{{ profit }}%</span>
                 </p>
                 <p >
                     Entry Price: <span *ngIf="entryPrice != 0">{{ entryPrice }}</span><br>
@@ -63,7 +63,7 @@
     <div class="value-container col-xs-9">
         Value: $<span class="value">{{ scoreService.accountValue }}</span>
         <br>
-        Profit: <span *ngIf="profit != null">{{ profit }}%</span>
+        Profit: <span [class.positive]="profit>0" [class.negative]="profit<0" *ngIf="profit != null">{{ profit }}%</span>
     </div>
     <div class="button-stats col-xs-3">
         <button class="btn btn-default" (click)="onClickStats()">STATS</button>
