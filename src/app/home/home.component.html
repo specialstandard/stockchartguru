@@ -10,7 +10,7 @@
                     Current Price: <span *ngIf="currentPrice !=0">{{ currentPrice }}</span><br>
                     Days this trade: <span >{{ daysInTrade }}</span><br>
                     Total days traded: <span >{{ totalDaysInTrade }}</span><br>
-                    APY: <span >{{ APY | number:'1.2-2' }}%</span><br>
+                    APY: <span [class.positive]="APY>0" [class.negative]="APY<0">{{ APY | number:'1.2-2' }}%</span><br>
                     Number Of Trades: <span >{{ numOfTrades }}</span><br>
                     Last stock: <span class="last-stock">{{ lastStockSymbol }} {{lastStockYear}}</span><br>
 
@@ -43,7 +43,7 @@
                     Current Price: <span *ngIf="currentPrice !=0">{{ currentPrice }}</span><br>
                     Days this trade: <span >{{ daysInTrade }}</span><br>
                     Total days traded: <span >{{ totalDaysInTrade }}</span><br>
-                    APY: <span >{{ APY | number:'1.2-2' }}%</span><br>
+                    APY: <span [class.positive]="APY>0" [class.negative]="APY<0" >{{ APY | number:'1.2-2' }}%</span><br>
                     Number Of Trades: <span >{{ numOfTrades }}</span><br>
                     Last stock: <span class="last-stock">{{ lastStockSymbol }} {{lastStockYear}}</span><br>
 
