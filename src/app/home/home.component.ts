@@ -17,10 +17,10 @@ import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 })
 export class HomeComponent implements OnInit {
     constructor(
-        private http: Http,
-        private scoreService: ScoreService,
-        private leaderboardService: LeaderboardService,
-        private fbService: FacebookService) { }
+        public http: Http,
+        public scoreService: ScoreService,
+        public leaderboardService: LeaderboardService,
+        public fbService: FacebookService) { }
 
 
     initParams: InitParams = { // For Facebook

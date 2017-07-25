@@ -12,7 +12,7 @@ import { LeaderboardService } from "../leaderboard/leaderboard.service";
 })
 export class AndiamoComponent implements OnInit {
     
-    constructor( private leaderboardService: LeaderboardService, private scoreService: ScoreService) { }
+    constructor( public leaderboardService: LeaderboardService, public scoreService: ScoreService) { }
     
     NUM_SCORES_TO_SHOW: number = 10;
     highScores: any;

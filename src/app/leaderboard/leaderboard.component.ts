@@ -12,7 +12,7 @@ import * as cryptojs from 'crypto-js';
 })
 export class LeaderboardComponent implements OnInit {
     
-    constructor( private leaderboardService: LeaderboardService, private scoreService: ScoreService) { }
+    constructor( public leaderboardService: LeaderboardService, public scoreService: ScoreService) { }
     
     NUM_SCORES_TO_SHOW: number = 10;
     highScores: any;
@@ -51,7 +51,7 @@ export class LeaderboardComponent implements OnInit {
     onClickMoreHighScores() {
         if (this.numHighScores === 10) {
             this.highScoresMoreText = 'Less'
-            this.numHighScores = 20
+            this.numHighScores = 30
         } else {
             this.numHighScores = 10
             this.highScoresMoreText = 'More'
@@ -61,7 +61,7 @@ export class LeaderboardComponent implements OnInit {
     onClickMoreHighScoresToday() {
         if (this.numHighScoresToday === 10) {
             this.highScoresTodayMoreText = 'Less'
-            this.numHighScoresToday = 20
+            this.numHighScoresToday = 30
         } else {
             this.highScoresTodayMoreText = 'More'
             this.numHighScoresToday = 10

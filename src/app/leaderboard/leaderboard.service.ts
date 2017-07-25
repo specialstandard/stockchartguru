@@ -19,7 +19,7 @@ export class LeaderboardService {
     public URL_GET_HIGH_SCORES: string;
     public URL_POST_HIGH_SCORE: string;
 
-    constructor(private http: Http, private scoreService: ScoreService) {
+    constructor(public http: Http, public scoreService: ScoreService) {
         this.setupEnvironment();
         this.setupLastPostId();
     }
