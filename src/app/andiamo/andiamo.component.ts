@@ -26,21 +26,21 @@ export class AndiamoComponent implements OnInit {
         this.getHighScores(this.NUM_SCORES_TO_SHOW);
         this.leaderboardService.setLocalHighScore();
         this.localHighScore = this.leaderboardService.localHighScore
-        console.log('this.localHighScore', this.localHighScore)
+        // console.log('this.localHighScore', this.localHighScore)
         //this.localHighScore.date = this.localHighScore.date.format('MM/DD/YYYY')
         let hash = cryptojs.MD5("Message");
-        console.log('hash', hash); 
+        // console.log('hash', hash); 
 
         var data = [{id: 1}, {id: 2}]
  
         // Encrypt 
         var ciphertext = cryptojs.AES.encrypt(JSON.stringify(data), 'secret key 123');
-                console.log('ciphertextinit', ciphertext)
+                // console.log('ciphertextinit', ciphertext)
 
         // Decrypt 
         var bytes  = cryptojs.AES.decrypt(ciphertext.toString(), 'secret key 123');
         var decryptedData = JSON.parse(bytes.toString(cryptojs.enc.Utf8));
-        console.log('decryptedData', decryptedData); 
+        // console.log('decryptedData', decryptedData); 
 
     }
 
@@ -62,7 +62,7 @@ export class AndiamoComponent implements OnInit {
                     let diff = moment.duration(now.diff(item.dateTime)).asHours();
                     return diff < 24; 
                 })
-                console.log(this.highScoresToday)
+                // console.log(this.highScoresToday)
                 this.makeSocialLinks();
             });
     }
@@ -115,7 +115,7 @@ export class AndiamoComponent implements OnInit {
     postTest(){
         this.leaderboardService.postTest()
             .subscribe((r)=> {
-                console.log('r ', r)
+                // console.log('r ', r)
             });
     }
 }

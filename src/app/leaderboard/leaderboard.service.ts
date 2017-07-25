@@ -76,7 +76,7 @@ export class LeaderboardService {
 
     postScore(score: number, date: moment.Moment, name: string): Observable<any> {
         let nameCut = name.slice(0, 14);
-        console.log(`score: ${score}. date: ${date}`);
+        // console.log(`score: ${score}. date: ${date}`);
         var message = `${score}${nameCut}`
         var dateTimeStamp = cryptojs.MD5(message + 'function').toString();     
         const body = {

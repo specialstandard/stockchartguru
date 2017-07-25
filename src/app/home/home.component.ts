@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
         this.dataPoints = [];
         this.symbol = this.getRandomSymbol()
         // this.symbol = 'HPQ' // Select particular stock symbol for DEBUG
-        console.log('symbol', this.symbol);        
+        // console.log('symbol', this.symbol);        
         this.getEquity()
     }
 
@@ -168,7 +168,7 @@ export class HomeComponent implements OnInit {
             this.index++
             this.update(this.dataPoints[this.dataPoints.length - 1]);
             this.showChart()
-            console.log('lastDataPoint', this.dataPoints[this.dataPoints.length-1])
+            // console.log('lastDataPoint', this.dataPoints[this.dataPoints.length-1])
         }
     }
 
