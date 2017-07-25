@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">All-time Top 10 Stock Chart Gurus:</div>
+                    <div class="panel-heading">All-time Top Stock Chart Gurus:</div>
                     <div class="panel-body">
                         <div *ngFor="let highScore of highScores; let i = index">
-                            <span *ngIf="i<10">
+                            <span *ngIf="i<numHighScores">
                                 <span class="score">
                                     ${{highScore?.score}}:
                                 </span>
@@ -18,6 +18,7 @@
                                 </span>
                             </span>
                         </div>
+                        <div class="more" (click)="onClickMoreHighScores()"><a>{{highScoresMoreText}}</a></div>
                     </div>
                 </div>
             </div>
@@ -26,7 +27,7 @@
                     <div class="panel-heading">Today's Top Stock Chart Gurus:</div>
                     <div class="panel-body">
                         <div *ngFor="let highScoreToday of highScoresToday; let i = index">
-                            <span *ngIf="i<10">
+                            <span *ngIf="i<numHighScoresToday">
                                 <span class="score">
                                     ${{highScoreToday?.score}}:
                                 </span>
@@ -41,6 +42,7 @@
                                 </span> -->
                             </span>
                         </div>
+                        <div class="more" (click)="onClickMoreHighScoresToday()"><a>{{highScoresTodayMoreText}}</a></div>
                     </div>
                 </div>
             </div>
@@ -70,10 +72,7 @@
                                     <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
                                 </a>
                             </span>
-                            <div class="fb-like col-sm-12">
-                                <fb-like href="http://stockchartguru.com"></fb-like>
-                            </div>
-                        </div>                       
+                        </div>
                     </div>
                 </div>
             </div>

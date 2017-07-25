@@ -27,6 +27,13 @@
         text-align: center;
         display: inline-block
     }
+
+    .more {
+        cursor: pointer;
+        margin: auto;
+        max-width: 50px;
+        text-align: center;
+    }
 }
 
 .col-sm-6, .col-sm-12 {

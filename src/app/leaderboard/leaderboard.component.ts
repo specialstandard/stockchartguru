@@ -16,9 +16,13 @@ export class LeaderboardComponent implements OnInit {
     
     NUM_SCORES_TO_SHOW: number = 10;
     highScores: any;
+    highScoresMoreText: string = 'More';
     highScoresToday: any;
+    highScoresTodayMoreText: string = 'More';
     localHighScore: any;
     name: string = '';
+    numHighScores: number = 10;
+    numHighScoresToday: number = 10;
     twitterLink: string;
     fbLink: string;
 
@@ -44,6 +48,25 @@ export class LeaderboardComponent implements OnInit {
 
     }
 
+    onClickMoreHighScores() {
+        if (this.numHighScores === 10) {
+            this.highScoresMoreText = 'Less'
+            this.numHighScores = 20
+        } else {
+            this.numHighScores = 10
+            this.highScoresMoreText = 'More'
+        }
+    }
+    
+    onClickMoreHighScoresToday() {
+        if (this.numHighScoresToday === 10) {
+            this.highScoresTodayMoreText = 'Less'
+            this.numHighScoresToday = 20
+        } else {
+            this.highScoresTodayMoreText = 'More'
+            this.numHighScoresToday = 10
+        }
+    }
     getHighScores(limit: number) {
         this.leaderboardService.getHighScores()
             .subscribe((result) => {

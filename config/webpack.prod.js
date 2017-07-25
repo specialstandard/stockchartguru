@@ -121,7 +121,11 @@ module.exports = function (env) {
           include: [helpers.root('src', 'styles')]
         },
 
-      ]
+      ],
+
+    //   loaders: [
+    //         { test: /\.js$/, loader: "strip-loader?strip[]=console.log" }
+    //     ]
 
     },
 
