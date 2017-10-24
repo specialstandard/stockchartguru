@@ -1,0 +1,36 @@
+<div class="info-component">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Articles</div>
+                    <div class="panel-body">
+                        <div class='article' *ngFor="let article of articles; let i = index">
+                            <span *ngIf="i<numArticles">
+                                <span class='title'>
+                                    <a [routerLink]="['/info/', article.url]">&#8226; {{article?.title}}</a>
+                                </span>                                
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a [routerLink]="['/chart']">
+                    <div class="alert alert-success">
+                        <strong>Get Started &#12297;</strong> Take me to the stock charts.
+                    </div>
+                </a>
+            </div>
+             <!-- <button (click)="postTest()">.</button>  -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <scg-footer>
+                </scg-footer>
+            </div>
+        </div>
+    </div>
+</div>

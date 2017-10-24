@@ -23,6 +23,10 @@ import { FacebookModule } from 'ngx-facebook';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { InfoComponent } from "./info/info.component";
+import { InfoService } from "./info/info.service";
+import { InfoDetailsComponent } from "./infoDetails/infoDetails.component";
+import { SpeedReadingComponent } from "./speedRead/speedReading.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -39,7 +43,10 @@ const APP_PROVIDERS = [
     HomeComponent,
     LeaderboardComponent,
     AboutComponent,
-    AndiamoComponent
+    AndiamoComponent,
+    InfoComponent,
+    InfoDetailsComponent,
+    SpeedReadingComponent
   ],
   /**
    * Import Angular's modules.
@@ -59,8 +66,9 @@ const APP_PROVIDERS = [
   providers: [
     ENV_PROVIDERS,
     APP_PROVIDERS,
+    InfoService,
     LeaderboardService,
-    ScoreService
+    ScoreService,
   ]
 })
 export class AppModule {

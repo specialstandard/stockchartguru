@@ -10,12 +10,15 @@
 
 nav a {
   color: #8f8f8f;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 48px;
   margin-right: 20px;
   text-decoration: none;
   vertical-align: middle;
+    @media (max-width: 400px) {
+        margin-right: 5px;
+    }
 }
 
 nav a.router-link-active {

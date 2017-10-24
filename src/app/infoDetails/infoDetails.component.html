@@ -1,0 +1,31 @@
+<div class="info-details-component">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{article?.title}}</div>
+                    <div class="panel-body">
+                        <p [innerHtml]="article?.content">                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a [routerLink]="['/chart']">
+                    <div class="alert alert-success">
+                        <strong>Get Started &#12297;</strong> Take me to the stock charts.
+                    </div>
+                </a>
+            </div>
+             <!-- <button (click)="postTest()">.</button>  -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <scg-footer>
+                </scg-footer>
+            </div>
+        </div>
+    </div>
+</div>

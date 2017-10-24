@@ -22,6 +22,8 @@ const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
+const CompressionPlugin = require("compression-webpack-plugin");
+
 //const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 /**
@@ -30,7 +32,7 @@ const ngcWebpack = require('ngc-webpack');
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
-  title: 'Stock Chart Guru',
+  title: 'Stock Chart Game. Technical Analysis. Backtesting & Simulation for Algorithmic and HFT (High Frequency Trading) Strategies',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR
@@ -419,6 +421,13 @@ module.exports = function (options) {
        * https://github.com/szrenwei/inline-manifest-webpack-plugin
        */
       new InlineManifestWebpackPlugin(),
+      new CompressionPlugin({
+			asset: "[path].gz[query]",
+			algorithm: "gzip",
+			test: /\.(js|html)$/,
+			threshold: 10240,
+			minRatio: 0.8
+		})
     ],
 
     /**

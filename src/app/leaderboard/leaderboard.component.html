@@ -56,7 +56,7 @@
                             <p>
                                 $<span class="value">{{localHighScore?.score}}</span> {{localHighScore?.date}}
                             </p>
-                            <label>Name: <input class="username" maxlength="15" [(ngModel)]="name"></label>
+                            <label>Name: <input class="username" maxlength="14" [(ngModel)]="name"></label>
                             <br>
                             <button class="submit btn btn-primary" (click)="onClickSubmitScore()">Submit High Score</button>
                             <button class="reset btn-reset btn btn-danger" (click)="onClickResetLocalHighScore()">Reset High Score</button>
@@ -71,23 +71,7 @@
                                 <a [href]="fbLink" target="_blank">
                                     <img class="fb" src="./assets/img/share_on_facebook.png" alt="Share on facebook">
                                 </a>
-                            </span>
-                            <div>
-                                <a title="Like this on Facebook" 
-                                    href="http://www.facebook.com/plugins/like.php?href=http://stockchartguru.com.au&amp;
-                                    layout=standard&amp;
-                                    show_faces=false&amp;
-                                    width=450&amp;
-                                    action=like&amp;
-                                    colorscheme=light&amp;">
-                                <img title="Facebook Like Button"
-                                    src="http://www.4wdaction.com.au/_phpBB/download/file.php?id=68849" 
-                                    alt="" 
-                                    height="50" 
-                                    width="50" 
-                                    />
-                                </a>
-                            </div>
+                            </span>                            
                         </div>
                     </div>
                 </div>
@@ -102,6 +86,12 @@
                 </a>
             </div>
              <!-- <button (click)="postTest()">.</button>  -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <scg-footer>
+                </scg-footer>
+            </div>
         </div>
     </div>
 </div>

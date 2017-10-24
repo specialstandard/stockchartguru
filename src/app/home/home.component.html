@@ -52,7 +52,8 @@
                     Trades Lost: <span >{{ numLost }}</span><br>
                     Ave PPW: <span >{{ averagePercentPerWin | number:'1.2-2' }}%</span><br>
                     Ave PPL: <span >{{ averagePercentPerLoss | number:'1.2-2' }}%</span><br>
-                    Won <span >{{ 100*numWon/numOfTrades | number:'1.2-2' }}%</span><br> -->
+                    Won <span >{{ 100*numWon/numOfTrades | number:'1.2-2' }}%</span><br>
+                    Ave PPT <span >{{ ((numWon/numOfTrades)*averagePercentPerWin/100) + ((1 - numWon/numOfTrades)*(averagePercentPerLoss/100)) | number:'1.4-4' }}%</span><br> -->
                 </p>
             </div>
         <!-- </div> -->
@@ -94,6 +95,12 @@
             </div>
             <div class="button-container col-xs-12">
                 <button class="btn btn-warning" *ngIf="activeLong" (click)="sellToClose(profit)">Sell to Close</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <scg-footer>
+                </scg-footer>
             </div>
         </div>
     </div>

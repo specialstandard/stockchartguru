@@ -1,4 +1,4 @@
-.leader-board {
+.info-component {
     margin-top: 10px;
 }
 .jumbotron {
@@ -14,37 +14,13 @@
     .panel-body {
         padding: 8px
     }
-
-    .score {
-        width: 89px;
-        display: inline-block;
-        @media (max-width: 350px) {
-            font-size: 13px;
-            width: 74px;
-        }
+    .article {
+        margin-bottom: 10px;
     }
-    .date {
-        width: 86px;
-        display: inline-block;
-        @media (max-width: 350px) {
-            font-size: 13px;
-            width: 71px;
-        }
-    }
-    .name {
-        text-align: center;
-        display: inline-block;
-        @media (max-width: 350px) {
-            font-size: 13px;
-        }
+    .title {
+        font-size: 16px;
     }
 
-    .more {
-        cursor: pointer;
-        margin: auto;
-        max-width: 50px;
-        text-align: center;
-    }
 }
 
 .col-sm-6, .col-sm-12 {

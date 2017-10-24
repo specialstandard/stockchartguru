@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="jumbotron">
+        {{word1}}<br>
+        <span *ngIf="wordsAtATime>1">{{word2}}</span>
+    </div>
+    <button class="btn btn-primary" (click)="onClickStart()">Start</button>
+    <button class="btn btn-primary" (click)="onClickStop()">Pause</button>
+    <button class="btn btn-primary" (click)="onClickLoad()">Load Text</button> 
+    <button class="btn btn-primary" (click)="onClickBeginning()">Beginning</button>
+    <br>
+    <p class="instructions">
+        Paste Text. Click "Load Text". Click "Start"
+    </p>
+    <textarea class="input-text" [(ngModel)]="text" placeholder="Paste Text Here"></textarea>
+    <br>
+    <input class="speed-wpm" type="text" [(ngModel)]="speedWpm"> Words Per Minute
+    <button class="btn btn-primary" (click)="onClickSetSpeed()">Set Speed</button>
+    <br>
+    <input class="speed-wpm" type="text" [(ngModel)]="index"> Word Number / {{wordCount}} Words
+    <!-- <button class="btn btn-primary" (click)="onClickLeft()">&#60;</button>
+    <button class="btn btn-primary" (click)="onClickRight()">&#62;</button>
+    <br> -->
+    <!-- <input type="radio" [(ngModel)]="wordsAtATime"  name="1" value="1">1<br>
+    <input type="radio" [(ngModel)]="wordsAtATime"  name="2" value="2">2     -->
+</div>

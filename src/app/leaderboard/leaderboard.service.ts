@@ -90,7 +90,11 @@ export class LeaderboardService {
         return this.http.post(this.URL_POST_HIGH_SCORE, body)
             .map(r => r.json())
             .do((x) => {
-                this.lastPostId = x._id
+                if (x._id===undefined) {
+                    this.lastPostId = ''
+                } else {
+                    this.lastPostId = x._id
+                }
                 localStorage.setItem('stockChartGuru.lastPostId', JSON.stringify(this.lastPostId))
             })
     }
