@@ -15,6 +15,14 @@
         padding: 8px
     }
 
+    .panel-heading {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 16px;
+    }
     .score {
         width: 89px;
         display: inline-block;
@@ -80,7 +88,7 @@
 .social-container {
     display: inline-block;
     margin-top: 20px;
-    
+
     .fb {
         width: 146px;
         margin-left: -4px;

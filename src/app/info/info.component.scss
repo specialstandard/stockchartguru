@@ -14,6 +14,10 @@
     .panel-body {
         padding: 8px
     }
+    .panel-heading {
+        font-size: 20px;
+        font-weight: bold;
+    }
     .article {
         margin-bottom: 10px;
     }
@@ -56,7 +60,7 @@
 .social-container {
     display: inline-block;
     margin-top: 20px;
-    
+
     .fb {
         width: 146px;
         margin-left: -4px;
